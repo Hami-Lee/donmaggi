@@ -1,0 +1,610 @@
+{
+  "ko": {
+    "food": {
+      "group": {
+        "emoji": "🌙",
+        "title": "홧김에 시키는 야식세트",
+        "desc": "족발 · 엽떡 · 치킨 중 오늘의 위기",
+        "maxPrice": 32000,
+        "pickTitle": "오늘의 야식, 뭘로 참아볼까요?",
+        "items": [
+          {
+            "name": "족발세트",
+            "price": 30000,
+            "emoji": "🍖",
+            "statLabel": "오늘 절약한 칼로리",
+            "statValue": "850kcal"
+          },
+          {
+            "name": "엽떡 매운맛 세트",
+            "price": 28000,
+            "emoji": "🌶️",
+            "statLabel": "오늘 절약한 칼로리",
+            "statValue": "620kcal"
+          },
+          {
+            "name": "치킨+맥주 세트",
+            "price": 32000,
+            "emoji": "🍗",
+            "statLabel": "오늘 절약한 칼로리",
+            "statValue": "980kcal"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "출근길 스트레스",
+          "name": "바닐라 라떼",
+          "price": 5000,
+          "emoji": "☕",
+          "statLabel": "오늘 참은 당 섭취량",
+          "statValue": "42g"
+        },
+        {
+          "label": "홧김에 지르는",
+          "name": "살말 틴트",
+          "price": 10000,
+          "emoji": "💄",
+          "statLabel": "오늘의 홧김 소비 욕구",
+          "statValue": "-1"
+        }
+      ]
+    },
+    "fashion": {
+      "group": {
+        "emoji": "🛍️",
+        "title": "홧김에 담는 무신사 장바구니",
+        "desc": "크롭후드 · 와이드팬츠 · 스니커즈 중 오늘의 위기",
+        "maxPrice": 89000,
+        "pickTitle": "오늘의 지름 욕구, 뭘로 참아볼까요?",
+        "items": [
+          {
+            "name": "오버핏 크롭후드",
+            "price": 59000,
+            "emoji": "🧥",
+            "statLabel": "옷장 속 안 입는 옷",
+            "statValue": "+1 방지"
+          },
+          {
+            "name": "와이드 팬츠",
+            "price": 49000,
+            "emoji": "👖",
+            "statLabel": "옷장 속 안 입는 옷",
+            "statValue": "+1 방지"
+          },
+          {
+            "name": "클래식 스니커즈",
+            "price": 89000,
+            "emoji": "👟",
+            "statLabel": "옷장 속 안 입는 옷",
+            "statValue": "+1 방지"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "스크롤하다 홧김에",
+          "name": "인스타 광고 니트",
+          "price": 39000,
+          "emoji": "🧶",
+          "statLabel": "오늘 참은 광고 시간",
+          "statValue": "3초"
+        },
+        {
+          "label": "80% 세일 문자 보고",
+          "name": "세일 셔츠",
+          "price": 32000,
+          "emoji": "👔",
+          "statLabel": "무시한 세일 알림",
+          "statValue": "5건"
+        }
+      ]
+    },
+    "beauty": {
+      "group": {
+        "emoji": "✨",
+        "title": "홧김에 담는 올리브영 장바구니",
+        "desc": "립틴트 · 쿠션팩트 · 마스카라 중 오늘의 위기",
+        "maxPrice": 32000,
+        "pickTitle": "오늘의 홧김템, 뭘로 참아볼까요?",
+        "items": [
+          {
+            "name": "글로시 립틴트",
+            "price": 12000,
+            "emoji": "💋",
+            "statLabel": "화장대 위 물건",
+            "statValue": "+1 방지"
+          },
+          {
+            "name": "쿠션 팩트",
+            "price": 32000,
+            "emoji": "🎨",
+            "statLabel": "화장대 위 물건",
+            "statValue": "+1 방지"
+          },
+          {
+            "name": "롱래시 마스카라",
+            "price": 18000,
+            "emoji": "👁️",
+            "statLabel": "화장대 위 물건",
+            "statValue": "+1 방지"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "유튜브 보다가",
+          "name": "추천템 세럼",
+          "price": 45000,
+          "emoji": "🧴",
+          "statLabel": "저항한 광고 영상",
+          "statValue": "1건"
+        },
+        {
+          "label": "특가 알림 뜬",
+          "name": "향수",
+          "price": 68000,
+          "emoji": "🌸",
+          "statLabel": "무시한 앱 알림",
+          "statValue": "1건"
+        }
+      ]
+    }
+  },
+  "en": {
+    "food": {
+      "group": {
+        "emoji": "🌙",
+        "title": "Late-night delivery binge set",
+        "desc": "Pick your crisis: pork trotters · tteokbokki · chicken",
+        "maxPrice": 32000,
+        "pickTitle": "Tonight's craving — which one are you resisting?",
+        "items": [
+          {
+            "name": "Pork Trotters Set",
+            "price": 30000,
+            "emoji": "🍖",
+            "statLabel": "Calories saved today",
+            "statValue": "850kcal"
+          },
+          {
+            "name": "Spicy Tteokbokki Set",
+            "price": 28000,
+            "emoji": "🌶️",
+            "statLabel": "Calories saved today",
+            "statValue": "620kcal"
+          },
+          {
+            "name": "Chicken + Beer Set",
+            "price": 32000,
+            "emoji": "🍗",
+            "statLabel": "Calories saved today",
+            "statValue": "980kcal"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "Commute stress",
+          "name": "Vanilla Latte",
+          "price": 5000,
+          "emoji": "☕",
+          "statLabel": "Sugar avoided today",
+          "statValue": "42g"
+        },
+        {
+          "label": "Impulse grab",
+          "name": "Lip Tint",
+          "price": 10000,
+          "emoji": "💄",
+          "statLabel": "Urge-to-splurge meter",
+          "statValue": "-1"
+        }
+      ]
+    },
+    "fashion": {
+      "group": {
+        "emoji": "🛍️",
+        "title": "Impulse online cart",
+        "desc": "Pick your crisis: cropped hoodie · wide pants · sneakers",
+        "maxPrice": 89000,
+        "pickTitle": "Today's shopping urge — which one are you resisting?",
+        "items": [
+          {
+            "name": "Oversized Cropped Hoodie",
+            "price": 59000,
+            "emoji": "🧥",
+            "statLabel": "Unworn closet items",
+            "statValue": "+1 avoided"
+          },
+          {
+            "name": "Wide-leg Pants",
+            "price": 49000,
+            "emoji": "👖",
+            "statLabel": "Unworn closet items",
+            "statValue": "+1 avoided"
+          },
+          {
+            "name": "Classic Sneakers",
+            "price": 89000,
+            "emoji": "👟",
+            "statLabel": "Unworn closet items",
+            "statValue": "+1 avoided"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "Doom-scrolling urge",
+          "name": "Ad-scroll Knit",
+          "price": 39000,
+          "emoji": "🧶",
+          "statLabel": "Ad resisted for",
+          "statValue": "3 sec"
+        },
+        {
+          "label": "80%-off text alert",
+          "name": "Sale Shirt",
+          "price": 32000,
+          "emoji": "👔",
+          "statLabel": "Sale alerts ignored",
+          "statValue": "5"
+        }
+      ]
+    },
+    "beauty": {
+      "group": {
+        "emoji": "✨",
+        "title": "Impulse beauty cart",
+        "desc": "Pick your crisis: tint · cushion · mascara",
+        "maxPrice": 32000,
+        "pickTitle": "Today's beauty urge — which one are you resisting?",
+        "items": [
+          {
+            "name": "Glossy Tint",
+            "price": 12000,
+            "emoji": "💋",
+            "statLabel": "Vanity clutter",
+            "statValue": "+1 avoided"
+          },
+          {
+            "name": "Cushion Compact",
+            "price": 32000,
+            "emoji": "🎨",
+            "statLabel": "Vanity clutter",
+            "statValue": "+1 avoided"
+          },
+          {
+            "name": "Long-lash Mascara",
+            "price": 18000,
+            "emoji": "👁️",
+            "statLabel": "Vanity clutter",
+            "statValue": "+1 avoided"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "Saw it on YouTube",
+          "name": "Influencer Serum",
+          "price": 45000,
+          "emoji": "🧴",
+          "statLabel": "Ad videos resisted",
+          "statValue": "1"
+        },
+        {
+          "label": "Flash sale alert",
+          "name": "Perfume",
+          "price": 68000,
+          "emoji": "🌸",
+          "statLabel": "App notifications ignored",
+          "statValue": "1"
+        }
+      ]
+    }
+  },
+  "ja": {
+    "food": {
+      "group": {
+        "emoji": "🌙",
+        "title": "衝動的な夜食セット",
+        "desc": "今日の危機を選んでください:豚足・トッポギ・チキン",
+        "maxPrice": 32000,
+        "pickTitle": "今夜の夜食、どれを我慢する?",
+        "items": [
+          {
+            "name": "豚足セット",
+            "price": 30000,
+            "emoji": "🍖",
+            "statLabel": "今日節約したカロリー",
+            "statValue": "850kcal"
+          },
+          {
+            "name": "激辛トッポギセット",
+            "price": 28000,
+            "emoji": "🌶️",
+            "statLabel": "今日節約したカロリー",
+            "statValue": "620kcal"
+          },
+          {
+            "name": "チキン+ビールセット",
+            "price": 32000,
+            "emoji": "🍗",
+            "statLabel": "今日節約したカロリー",
+            "statValue": "980kcal"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "出勤ストレス",
+          "name": "バニララテ",
+          "price": 5000,
+          "emoji": "☕",
+          "statLabel": "今日我慢した糖分",
+          "statValue": "42g"
+        },
+        {
+          "label": "衝動買い",
+          "name": "ティント",
+          "price": 10000,
+          "emoji": "💄",
+          "statLabel": "衝動買い欲求",
+          "statValue": "-1"
+        }
+      ]
+    },
+    "fashion": {
+      "group": {
+        "emoji": "🛍️",
+        "title": "衝動的なショッピングカート",
+        "desc": "今日の危機を選んでください:クロップパーカー・ワイドパンツ・スニーカー",
+        "maxPrice": 89000,
+        "pickTitle": "今日の物欲、どれを我慢する?",
+        "items": [
+          {
+            "name": "オーバーフィットクロップパーカー",
+            "price": 59000,
+            "emoji": "🧥",
+            "statLabel": "着ない服",
+            "statValue": "+1防止"
+          },
+          {
+            "name": "ワイドパンツ",
+            "price": 49000,
+            "emoji": "👖",
+            "statLabel": "着ない服",
+            "statValue": "+1防止"
+          },
+          {
+            "name": "クラシックスニーカー",
+            "price": 89000,
+            "emoji": "👟",
+            "statLabel": "着ない服",
+            "statValue": "+1防止"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "スクロール中に衝動的",
+          "name": "広告のニット",
+          "price": 39000,
+          "emoji": "🧶",
+          "statLabel": "我慢した広告時間",
+          "statValue": "3秒"
+        },
+        {
+          "label": "セール通知を見て",
+          "name": "セールシャツ",
+          "price": 32000,
+          "emoji": "👔",
+          "statLabel": "無視したセール通知",
+          "statValue": "5件"
+        }
+      ]
+    },
+    "beauty": {
+      "group": {
+        "emoji": "✨",
+        "title": "衝動的なコスメカート",
+        "desc": "今日の危機を選んでください:ティント・クッションファンデ・マスカラ",
+        "maxPrice": 32000,
+        "pickTitle": "今日の衝動買い、どれを我慢する?",
+        "items": [
+          {
+            "name": "グロッシーティント",
+            "price": 12000,
+            "emoji": "💋",
+            "statLabel": "化粧台の物",
+            "statValue": "+1防止"
+          },
+          {
+            "name": "クッションファンデ",
+            "price": 32000,
+            "emoji": "🎨",
+            "statLabel": "化粧台の物",
+            "statValue": "+1防止"
+          },
+          {
+            "name": "ロングラッシュマスカラ",
+            "price": 18000,
+            "emoji": "👁️",
+            "statLabel": "化粧台の物",
+            "statValue": "+1防止"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "YouTubeで見た",
+          "name": "おすすめ美容液",
+          "price": 45000,
+          "emoji": "🧴",
+          "statLabel": "我慢した広告動画",
+          "statValue": "1件"
+        },
+        {
+          "label": "特価通知",
+          "name": "香水",
+          "price": 68000,
+          "emoji": "🌸",
+          "statLabel": "無視したアプリ通知",
+          "statValue": "1件"
+        }
+      ]
+    }
+  },
+  "zh": {
+    "food": {
+      "group": {
+        "emoji": "🌙",
+        "title": "一时冲动的夜宵套餐",
+        "desc": "选择今天的危机: 猪蹄 · 辣炒年糕 · 炸鸡",
+        "maxPrice": 32000,
+        "pickTitle": "今晚的夜宵,要忍住哪一个?",
+        "items": [
+          {
+            "name": "猪蹄套餐",
+            "price": 30000,
+            "emoji": "🍖",
+            "statLabel": "今日节省卡路里",
+            "statValue": "850kcal"
+          },
+          {
+            "name": "辣味炒年糕套餐",
+            "price": 28000,
+            "emoji": "🌶️",
+            "statLabel": "今日节省卡路里",
+            "statValue": "620kcal"
+          },
+          {
+            "name": "炸鸡+啤酒套餐",
+            "price": 32000,
+            "emoji": "🍗",
+            "statLabel": "今日节省卡路里",
+            "statValue": "980kcal"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "上班压力",
+          "name": "香草拿铁",
+          "price": 5000,
+          "emoji": "☕",
+          "statLabel": "今日忍住的糖分",
+          "statValue": "42g"
+        },
+        {
+          "label": "一时冲动",
+          "name": "唇彩",
+          "price": 10000,
+          "emoji": "💄",
+          "statLabel": "冲动消费欲望",
+          "statValue": "-1"
+        }
+      ]
+    },
+    "fashion": {
+      "group": {
+        "emoji": "🛍️",
+        "title": "冲动购物车",
+        "desc": "选择今天的危机: 短款卫衣 · 阔腿裤 · 运动鞋",
+        "maxPrice": 89000,
+        "pickTitle": "今天的购物欲,要忍住哪一个?",
+        "items": [
+          {
+            "name": "oversize短款卫衣",
+            "price": 59000,
+            "emoji": "🧥",
+            "statLabel": "衣柜闲置衣物",
+            "statValue": "+1避免"
+          },
+          {
+            "name": "阔腿裤",
+            "price": 49000,
+            "emoji": "👖",
+            "statLabel": "衣柜闲置衣物",
+            "statValue": "+1避免"
+          },
+          {
+            "name": "经典运动鞋",
+            "price": 89000,
+            "emoji": "👟",
+            "statLabel": "衣柜闲置衣物",
+            "statValue": "+1避免"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "刷手机时冲动",
+          "name": "广告款针织衫",
+          "price": 39000,
+          "emoji": "🧶",
+          "statLabel": "成功忽略广告",
+          "statValue": "3秒"
+        },
+        {
+          "label": "80%折扣短信",
+          "name": "特卖衬衫",
+          "price": 32000,
+          "emoji": "👔",
+          "statLabel": "忽略的促销通知",
+          "statValue": "5条"
+        }
+      ]
+    },
+    "beauty": {
+      "group": {
+        "emoji": "✨",
+        "title": "冲动美妆购物车",
+        "desc": "选择今天的危机: 唇彩 · 气垫 · 睫毛膏",
+        "maxPrice": 32000,
+        "pickTitle": "今天的美妆冲动,要忍住哪一个?",
+        "items": [
+          {
+            "name": "亮泽唇彩",
+            "price": 12000,
+            "emoji": "💋",
+            "statLabel": "梳妆台物品",
+            "statValue": "+1避免"
+          },
+          {
+            "name": "气垫粉底",
+            "price": 32000,
+            "emoji": "🎨",
+            "statLabel": "梳妆台物品",
+            "statValue": "+1避免"
+          },
+          {
+            "name": "浓密睫毛膏",
+            "price": 18000,
+            "emoji": "👁️",
+            "statLabel": "梳妆台物品",
+            "statValue": "+1避免"
+          }
+        ]
+      },
+      "smalls": [
+        {
+          "label": "刷YouTube时看到",
+          "name": "网红推荐精华",
+          "price": 45000,
+          "emoji": "🧴",
+          "statLabel": "抵制的广告视频",
+          "statValue": "1个"
+        },
+        {
+          "label": "特价提醒",
+          "name": "香水",
+          "price": 68000,
+          "emoji": "🌸",
+          "statLabel": "忽略的App通知",
+          "statValue": "1个"
+        }
+      ]
+    }
+  }
+}

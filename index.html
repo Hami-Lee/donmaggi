@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<title>Donmaggi - 미래의 나에게 배송</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f7f6f1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="돈막이">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon-192.png">
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    background: #eeece4;
+    display: flex;
+    justify-content: center;
+    padding: 32px 12px;
+    color: #1a1a1a;
+  }
+  .phone {
+    width: 100%;
+    max-width: 380px;
+    height: 720px;
+    background: #fff;
+    border-radius: 32px;
+    padding: 10px;
+    border: 1px solid #e2dfd4;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .app { background: #f7f6f1; border-radius: 24px; height: 100%; overflow-y: auto; position: relative; }
+
+  .topbar { padding: 16px 16px 0; }
+  .toprow { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .brand { font-size: 13px; font-weight: 700; color: #ff6b3d; letter-spacing: -0.3px; }
+  .langs { display: flex; gap: 4px; }
+  .lang-btn { width: 26px; height: 26px; border-radius: 8px; border: 1px solid #ece9df; background: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .lang-btn.active { border-color: #1a1a1a; box-shadow: 0 0 0 1px #1a1a1a inset; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+  .tab { flex: 1; text-align: center; padding: 10px 4px; border-radius: 12px; background: #fff; font-size: 12px; font-weight: 600; color: #999; border: 1px solid #ece9df; cursor: pointer; transition: background .15s ease, color .15s ease; }
+  .tab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
+  /* ---------- 목표 칩 리스트 ---------- */
+  .goal-chips { display: flex; gap: 8px; padding: 0 16px; margin-bottom: 10px; overflow-x: auto; scrollbar-width: none; }
+  .goal-chips::-webkit-scrollbar { display: none; }
+  .chip { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #ece9df; border-radius: 999px; padding: 7px 12px; font-size: 12px; font-weight: 600; color: #999; cursor: pointer; white-space: nowrap; }
+  .chip.active { border-color: #ff6b3d; color: #ff6b3d; background: #fff6f2; }
+  .chip .pct { font-weight: 700; }
+  .chip-add { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #1a1a1a; color: #fff; font-size: 16px; cursor: pointer; }
+
+  .goal-card { margin: 0 16px 18px; background: #fff; border-radius: 18px; padding: 16px; border: 1px solid #ece9df; }
+  .goal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .goal-name { font-size: 14px; font-weight: 700; }
+  .goal-pct { font-size: 13px; font-weight: 700; color: #ff6b3d; }
+  .goal-amt { font-size: 12px; color: #999; margin-bottom: 14px; }
+  .gauge { position: relative; height: 34px; margin-bottom: 6px; }
+  .gauge-track { position: absolute; top: 15px; left: 6px; right: 6px; height: 4px; background: #ece9df; border-radius: 2px; }
+  .gauge-fill { position: absolute; top: 15px; left: 6px; height: 4px; background: linear-gradient(90deg,#ffb199,#ff6b3d); border-radius: 2px; transition: width .6s ease; }
+  .gauge-plane { position: absolute; top: 2px; font-size: 20px; transform: translateX(-50%); transition: left .6s ease; }
+  .gauge-steps { display: flex; justify-content: space-between; font-size: 10px; color: #b5b2a8; }
+  .gauge-steps span.done { color: #ff6b3d; font-weight: 700; }
+
+  .section-title { padding: 0 16px; font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+  .section-sub { padding: 0 16px; font-size: 12px; color: #999; margin-bottom: 12px; }
+  .zone { padding: 0 16px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .card-lg { display: flex; background: #fff; border-radius: 16px; padding: 14px; border: 1px solid #ece9df; align-items: center; gap: 12px; cursor: pointer; }
+  .card-lg .emoji { font-size: 30px; }
+  .card-lg .info { flex: 1; }
+  .card-lg .title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .card-lg .desc { font-size: 11px; color: #999; }
+  .card-lg .price { font-size: 13px; font-weight: 700; color: #ff6b3d; }
+  .row-2 { display: flex; gap: 10px; }
+  .card-sm { flex: 1; background: #fff; border-radius: 16px; padding: 12px; border: 1px solid #ece9df; text-align: center; cursor: pointer; }
+  .card-sm .emoji { font-size: 26px; margin-bottom: 6px; }
+  .card-sm .label { font-size: 10px; color: #b5b2a8; margin-bottom: 2px; }
+  .card-sm .title { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+  .card-sm .price { font-size: 12px; font-weight: 700; color: #ff6b3d; }
+
+  .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: flex-end; opacity: 0; pointer-events: none; transition: opacity .25s ease; border-radius: 24px; }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .sheet { width: 100%; background: #fff; border-radius: 22px 22px 0 0; padding: 22px 20px 24px; transform: translateY(100%); transition: transform .3s ease; max-height: 90%; overflow-y: auto; }
+  .overlay.open .sheet { transform: translateY(0); }
+  .sheet-handle { width: 36px; height: 4px; background: #e5e3da; border-radius: 2px; margin: 0 auto 16px; }
+
+  h3.sheet-title { margin: 0 0 8px; font-size: 17px; font-weight: 700; }
+  p.sheet-desc { margin: 0 0 18px; font-size: 13px; color: #666; line-height: 1.5; }
+  .list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; border-bottom: 1px solid #f1efe8; cursor: pointer; font-size: 14px; }
+  .list-item:last-child { border-bottom: none; }
+  .list-item .p { color: #999; font-size: 13px; }
+
+  button.primary, button.ghost { width: 100%; height: 50px; border-radius: 12px; font-size: 15px; font-weight: 700; border: none; cursor: pointer; margin-top: 6px; }
+  button.primary { background: #1a1a1a; color: #fff; }
+  button.ghost { background: transparent; color: #999; }
+
+  .confirm-box { background: #fff7f3; border: 1px solid #ffd9c7; border-radius: 14px; padding: 14px; margin-bottom: 18px; font-size: 13px; color: #b0491f; line-height: 1.5; }
+
+  .pay-amt { text-align: center; font-size: 26px; font-weight: 800; margin-bottom: 18px; }
+  .card-option { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #ece9df; border-radius: 12px; margin-bottom: 8px; font-size: 14px; cursor: pointer; }
+  .card-option.selected { border-color: #1a1a1a; background: #faf9f6; }
+  .radio { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #ccc; flex-shrink: 0; }
+  .card-option.selected .radio { border-color: #1a1a1a; background: radial-gradient(#1a1a1a 40%, transparent 44%); }
+
+  .auth-wrap { text-align: center; padding: 10px 0 6px; }
+  .fingerprint { width: 70px; height: 70px; border-radius: 50%; background: #f1efe8; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 30px; cursor: pointer; }
+  .fingerprint.scanning { animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{ box-shadow:0 0 0 0 rgba(26,26,26,0.15);} 50%{ box-shadow:0 0 0 12px rgba(26,26,26,0);} }
+
+  .receipt-screen { position: absolute; inset: 0; background: #fff; border-radius: 24px; padding: 32px 22px 24px; display: none; flex-direction: column; align-items: center; text-align: center; opacity: 0; transition: opacity .3s ease; }
+  .receipt-screen.open { display: flex; opacity: 1; }
+  .rocket { font-size: 44px; margin-bottom: 14px; }
+  .receipt-screen h2 { margin: 0 0 4px; font-size: 18px; }
+  .receipt-screen .sub { font-size: 13px; color: #999; margin-bottom: 20px; }
+  .receipt-card { width: 100%; border: 1px dashed #ddd8c9; border-radius: 14px; padding: 18px; text-align: left; font-size: 13px; line-height: 2; background: #fffdf8; }
+  .receipt-card .tag { display: inline-block; background: #1a1a1a; color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; }
+  .r-row { display: flex; justify-content: space-between; border-bottom: 1px dotted #eee; padding: 2px 0; }
+  .r-row .k { color: #999; }
+  .r-row .v { font-weight: 700; }
+  .receipt-screen button.primary { margin-top: 20px; }
+
+  /* ---------- 새 목표 만들기 ---------- */
+  .emoji-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .emoji-opt { width: 42px; height: 42px; border-radius: 12px; background: #f7f6f1; border: 2px solid transparent; font-size: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .emoji-opt.selected { border-color: #1a1a1a; background: #fff; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 12px; color: #999; margin-bottom: 6px; font-weight: 600; }
+  .field input { width: 100%; height: 46px; border-radius: 10px; border: 1px solid #ece9df; padding: 0 12px; font-size: 14px; font-family: inherit; }
+  .field input:focus { outline: none; border-color: #1a1a1a; }
+
+  /* ---------- 앱(설치) 모드 / 모바일: 목업 프레임 제거하고 전체화면 ---------- */
+  @media (display-mode: standalone), (display-mode: fullscreen), (max-width: 480px) {
+    html, body { height: 100%; overscroll-behavior: none; }
+    body { padding: 0; background: #f7f6f1; }
+    .phone {
+      max-width: none; width: 100%; height: 100dvh;
+      border: none; border-radius: 0; box-shadow: none;
+      padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+      background: #f7f6f1;
+    }
+    .app { border-radius: 0; }
+    .overlay, .receipt-screen { border-radius: 0; }
+    .sheet { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+  }
+</style>
+</head>
+<body>
+
+<div class="phone"><div class="app" id="app">
+
+  <div class="topbar">
+    <div class="toprow">
+      <div class="brand" id="brandText">Donmaggi</div>
+      <div class="langs">
+        <div class="lang-btn" id="settingsBtn" onclick="openSettings()">⚙️</div>
+        <div class="lang-btn active" id="lang-ko" onclick="setLanguage('ko')">🇰🇷</div>
+        <div class="lang-btn" id="lang-en" onclick="setLanguage('en')">🇺🇸</div>
+        <div class="lang-btn" id="lang-ja" onclick="setLanguage('ja')">🇯🇵</div>
+        <div class="lang-btn" id="lang-zh" onclick="setLanguage('zh')">🇨🇳</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab" id="tab-food" onclick="switchTab('food')"></div>
+      <div class="tab" id="tab-fashion" onclick="switchTab('fashion')"></div>
+      <div class="tab" id="tab-beauty" onclick="switchTab('beauty')"></div>
+    </div>
+  </div>
+
+  <div class="goal-chips" id="goalChips"></div>
+
+  <div class="goal-card">
+    <div class="goal-top">
+      <span class="goal-name" id="goalNameText"></span>
+      <span class="goal-pct" id="goalPct">70%</span>
+    </div>
+    <div class="goal-amt" id="goalAmt"></div>
+    <div class="gauge">
+      <div class="gauge-track"></div>
+      <div class="gauge-fill" id="gaugeFill" style="width:70%"></div>
+      <div class="gauge-plane" id="gaugePlane" style="left:70%">✈️</div>
+    </div>
+    <div class="gauge-steps">
+      <span class="done" id="stepPaid"></span>
+      <span class="done" id="stepPrep"></span>
+      <span id="stepShip"></span>
+      <span id="stepDone"></span>
+    </div>
+  </div>
+
+  <div class="section-title" id="sectionTitleText"></div>
+  <div class="section-sub" id="sectionSubText"></div>
+  <div class="zone" id="zone"></div>
+
+  <!-- 카카오페이 링크 설정 -->
+  <div class="overlay" id="ovSettings">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="settingsTitleText"></h3>
+      <p class="sheet-desc" id="settingsDescText"></p>
+      <div class="field">
+        <label id="settingsInputLabelText"></label>
+        <input type="url" id="myKakaoLinkInput" placeholder="https://link.kakaopay.com/...">
+      </div>
+      <div class="field">
+        <label id="settingsBankLabelText"></label>
+        <input type="text" id="myBankInput" maxlength="20">
+      </div>
+      <div class="field">
+        <label id="settingsAccountLabelText"></label>
+        <input type="text" id="myAccountInput" maxlength="30" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label>상품 목록 주소 (Catalog URL)</label>
+        <input type="url" id="catalogUrlInput" placeholder="products.json 또는 https://...">
+        <div style="font-size:11px;color:#bbb;margin-top:5px" id="catalogStatus"></div>
+      </div>
+      <button class="primary" id="settingsSaveBtn" onclick="saveSettings()"></button>
+      <button class="ghost" id="settingsCancelBtn" onclick="closeOverlay('ovSettings')"></button>
+      <button class="ghost" onclick="resetState()" style="height:36px;font-size:12px;color:#c0392b">↺ Reset</button>
+    </div>
+  </div>
+
+  <!-- 새 목표 만들기 -->
+  <div class="overlay" id="ovNewGoal">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="newGoalTitleText"></h3>
+      <p class="sheet-desc" id="chooseIconText"></p>
+      <div class="emoji-grid" id="emojiGrid"></div>
+      <div class="field">
+        <label id="goalNameLabelText"></label>
+        <input type="text" id="newGoalName" maxlength="20">
+      </div>
+      <div class="field">
+        <label id="goalAmountLabelText"></label>
+        <input type="number" id="newGoalAmount" min="1000" step="1000">
+      </div>
+      <button class="primary" id="goalSaveBtn" onclick="saveNewGoal()"></button>
+      <button class="ghost" id="goalCancelBtn" onclick="closeOverlay('ovNewGoal')"></button>
+    </div>
+  </div>
+
+  <div class="overlay" id="ovGroup">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="groupTitle"></h3>
+      <div id="groupList"></div>
+      <button class="ghost" id="groupCloseBtn" onclick="closeOverlay('ovGroup')"></button>
+    </div>
+  </div>
+
+  <div class="overlay" id="ovConfirm">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="cfTitle"></h3>
+      <div class="confirm-box" id="cfBox"></div>
+      <button class="primary" id="confirmBuyBtn" onclick="openPayment()"></button>
+      <button class="ghost" id="confirmCancelBtn" onclick="closeOverlay('ovConfirm')"></button>
+    </div>
+  </div>
+
+  <div class="overlay" id="ovPay">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="payTitleText"></h3>
+      <div class="pay-amt" id="payAmt">30,000</div>
+      <div class="card-option selected" data-method="card" onclick="selectCard(this)"><div class="radio"></div><span id="payLumpLabel"></span></div>
+      <div class="card-option" data-method="card" onclick="selectCard(this)"><div class="radio"></div><span id="payShinhanLabel"></span></div>
+      <div class="card-option" data-method="card" onclick="selectCard(this)"><div class="radio"></div><span id="payKakaobankLabel"></span></div>
+      <div class="card-option" data-method="kakaopay" onclick="selectCard(this)"><div class="radio"></div><span id="payKakaopayLabel"></span></div>
+      <div class="card-option" data-method="myaccount" onclick="selectCard(this)"><div class="radio"></div><span id="payMyAccountLabel"></span></div>
+      <button class="primary" id="payButtonText" onclick="handlePayClick()"></button>
+    </div>
+  </div>
+
+  <div class="overlay" id="ovAuth">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="auth-wrap">
+        <h3 class="sheet-title" id="authTitleText"></h3>
+        <p class="sheet-desc" id="authDescText"></p>
+        <div class="fingerprint" id="fingerBtn" onclick="runAuth()">👆</div>
+        <p class="sheet-desc" id="authStatus" style="margin-bottom:0"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="ovKakao">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="auth-wrap">
+        <h3 class="sheet-title" id="kakaoTitleText"></h3>
+        <p class="sheet-desc" id="kakaoDescText"></p>
+        <div class="fingerprint" style="background:#fee500;" onclick="openKakaoLink()">💬</div>
+        <p class="sheet-desc" id="kakaoHintText" style="margin-bottom:18px"></p>
+        <button class="primary" id="kakaoDoneBtn" onclick="confirmKakaoSent()"></button>
+        <button class="ghost" id="kakaoCancelBtn" onclick="closeOverlay('ovKakao')"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 내 계좌로 이체 -->
+  <div class="overlay" id="ovMyAccount">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="auth-wrap">
+        <h3 class="sheet-title" id="myAccTitleText"></h3>
+        <p class="sheet-desc" id="myAccDescText"></p>
+        <div class="confirm-box" style="text-align:center;color:#1a1a1a;background:#f7f6f1;border-color:#ece9df">
+          <div style="font-size:12px;color:#999" id="myAccBankShow"></div>
+          <div style="font-size:18px;font-weight:800;letter-spacing:.5px" id="myAccNumShow"></div>
+          <div style="font-size:15px;font-weight:700;color:#ff6b3d;margin-top:4px" id="myAccAmtShow"></div>
+        </div>
+        <button class="ghost" id="myAccCopyBtn" onclick="copyMyAccount()" style="height:40px;margin-top:0"></button>
+        <button class="primary" id="myAccDoneBtn" onclick="confirmMyAccountSent()"></button>
+        <button class="ghost" id="myAccCancelBtn" onclick="closeOverlay('ovMyAccount')"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="receipt-screen" id="ovReceipt">
+    <div class="rocket">🚀</div>
+    <h2 id="receiptTitleText"></h2>
+    <div class="sub" id="receiptSubText"></div>
+    <div class="receipt-card">
+      <span class="tag" id="receiptTagText"></span>
+      <div class="r-row"><span class="k" id="receiptProductLabel"></span><span class="v" id="rcName"></span></div>
+      <div class="r-row"><span class="k" id="receiptPriceLabel"></span><span class="v" id="rcPrice"></span></div>
+      <div class="r-row"><span class="k" id="receiptAddrLabel"></span><span class="v" id="receiptAddrValue"></span></div>
+      <div class="r-row"><span class="k" id="rcStatLabel"></span><span class="v" id="rcStat"></span></div>
+      <div class="r-row"><span class="k" id="receiptContributionLabel"></span><span class="v" id="rcGoalPct"></span></div>
+    </div>
+    <button class="primary" id="receiptBackBtn" onclick="finishReceipt()"></button>
+  </div>
+
+</div></div>
+
+<script>
+  const DEFAULT_GOALS = [ { id: 'default', emoji: '✈️', name: null, target: 350000, saved: 245000 } ];
+
+  // ---------- 저장/불러오기 ----------
+  function loadState() {
+    try {
+      const raw = localStorage.getItem('donmaggi_goals');
+      const parsed = raw ? JSON.parse(raw) : null;
+      if (Array.isArray(parsed) && parsed.length) return parsed;
+    } catch (e) {}
+    return JSON.parse(JSON.stringify(DEFAULT_GOALS));
+  }
+  function saveState() {
+    try {
+      localStorage.setItem('donmaggi_goals', JSON.stringify(goals));
+      localStorage.setItem('donmaggi_activeGoal', activeGoalId);
+      localStorage.setItem('donmaggi_lang', currentLang);
+    } catch (e) {}
+  }
+  function resetState() {
+    if (!confirm('저장된 목표를 모두 지우고 처음 상태로 되돌릴까요?')) return;
+    localStorage.removeItem('donmaggi_goals');
+    localStorage.removeItem('donmaggi_activeGoal');
+    localStorage.removeItem('donmaggi_catalog_cache');
+    location.reload();
+  }
+
+  let goals = loadState();
+  let activeGoalId = (goals.find(g => g.id === localStorage.getItem('donmaggi_activeGoal')) || goals[0]).id;
+  let current = null;
+  let activeTab = 'food';
+  let currentLang = localStorage.getItem('donmaggi_lang') || 'ko';
+  let selectedMethod = 'card';
+  let selectedNewEmoji = '⭐';
+  let KAKAO_LINK = localStorage.getItem('myKakaoLink') || '';
+  let MY_BANK = localStorage.getItem('myBank') || '';
+  let MY_ACCOUNT = localStorage.getItem('myAccount') || '';
+  const EMOJI_CHOICES = ['⭐','💻','📱','🎧','👜','🚗','🎮','📷','🏠','👟','⌚','🎸'];
+
+  function fmt(n) { return n.toLocaleString('en-US'); }
+  function activeGoal() { return goals.find(g => g.id === activeGoalId); }
+  function goalDisplayName(g) { return g.id === 'default' ? T[currentLang].goalName : `${g.emoji} ${g.name}`; }
+
+  const T = {
+    ko: { brand:'Donmaggi 돈막이', tabFood:'🍚 배달음식', tabFashion:'👕 패션', tabBeauty:'💄 뷰티',
+      goalName:'✈️ 제주도 왕복 항공권', sectionTitle:'🔥 충동구매 존', sectionSub:'오늘의 위기 상황을 골라보세요',
+      stepPaid:'결제완료', stepPrep:'상품준비', stepShip:'배송중', stepDone:'배송완료',
+      currency:'원', savedSuffix:'모음', groupClose:'닫기',
+      confirmTemplate:(n,p)=>`오늘 ${n}를 참으면 <b>${p}</b>이 고스란히 내 자산으로 배송됩니다.<br>주문하시겠습니까?`,
+      confirmBuy:'구매하기', confirmCancel:'그냥 참기 실패, 취소', payTitle:'결제수단 선택',
+      payLump:'일시불', payShinhan:'신한카드 (1234)', payKakaobank:'카카오뱅크 체크카드',
+      payKakaopay:'💬 카카오페이 송금 링크로 보내기', payButton:'결제하기',
+      authTitle:'본인 인증', authDesc:'생체 인증으로 결제를 완료하세요', authTouch:'터치해서 인증하기', authScanning:'인증 중...',
+      kakaoTitle:'카카오페이로 송금하기', kakaoDesc:'버튼을 누르면 카카오페이 송금 화면이 열려요.<br>송금을 완료하고 이 화면으로 돌아와주세요.',
+      kakaoHint:'탭하면 카카오페이가 열려요', kakaoDone:'송금 완료했어요', kakaoCancel:'취소',
+      receiptTitle:'주문이 완료되었습니다', receiptSub:'내 통장으로 로켓 배송중', receiptTag:'지름 방어 성공 영수증',
+      receiptProduct:'상품명', receiptPrice:'결제 금액', receiptAddr:'배송지', receiptAddrValue:'내 미래 자산 통장',
+      receiptContribution:'아낀 돈으로 다가온 것', receiptBack:'목표로 돌아가기',
+      addGoal:'+ 목표 추가', newGoalTitle:'새 목표 만들기', chooseIcon:'아이콘을 골라주세요',
+      goalNameLabel:'목표 이름', goalNamePlaceholder:'예: 새 노트북', goalAmountLabel:'목표 금액 (원)',
+      goalAmountPlaceholder:'예: 1500000', goalSave:'목표 만들기', goalCancel:'취소',
+      settingsTitle:'카카오페이 링크 설정', settingsDesc:'developers.kakaopay.com 개발자센터에서 발급받은 본인의 코드송금 링크를 붙여넣어주세요.',
+      settingsInputLabel:'내 송금 링크', settingsSave:'저장하기', settingsCancel:'닫기',
+      settingsMissing:'먼저 설정에서 본인의 카카오페이 링크를 등록해주세요.',
+      settingsBankLabel:'저축 계좌 은행', settingsBankPlaceholder:'예: 카카오뱅크',
+      settingsAccountLabel:'저축 계좌번호', settingsAccountPlaceholder:'예: 3333-01-1234567',
+      payMyAccount:'🏦 내 저축 계좌로 직접 이체', myAccTitle:'내 저축 계좌로 이체하기',
+      myAccDesc:'은행 앱에서 아래 계좌로 직접 이체해주세요.\n돈은 처음부터 끝까지 내 것입니다.',
+      myAccCopy:'계좌번호 복사', myAccCopied:'복사됐어요!', myAccDone:'이체 완료했어요', myAccCancel:'취소' },
+    en: { brand:'Donmaggi', tabFood:'🍚 Delivery', tabFashion:'👕 Fashion', tabBeauty:'💄 Beauty',
+      goalName:'✈️ Round-trip Flight to Jeju', sectionTitle:'🔥 Impulse Zone', sectionSub:"Pick today's crisis",
+      stepPaid:'Paid', stepPrep:'Preparing', stepShip:'Shipping', stepDone:'Delivered',
+      currency:' KRW', savedSuffix:'saved', groupClose:'Close',
+      confirmTemplate:(n,p)=>`Resist ${n} today, and <b>${p}</b> ships straight to your future self.<br>Place the order?`,
+      confirmBuy:'Place Order', confirmCancel:'Actually, cancel', payTitle:'Choose Payment Method',
+      payLump:'One-time payment', payShinhan:'Shinhan Card (1234)', payKakaobank:'KakaoBank Check Card',
+      payKakaopay:'💬 Send via KakaoPay link', payButton:'Pay Now',
+      authTitle:'Verify Identity', authDesc:'Complete payment with biometric authentication', authTouch:'Tap to authenticate', authScanning:'Authenticating...',
+      kakaoTitle:'Send via KakaoPay', kakaoDesc:'Tap the button to open KakaoPay.<br>Come back here once the transfer is done.',
+      kakaoHint:'Tap to open KakaoPay', kakaoDone:"I've sent it", kakaoCancel:'Cancel',
+      receiptTitle:'Order Complete', receiptSub:'Rocket delivery to your savings account', receiptTag:'Impulse-Defense Receipt',
+      receiptProduct:'Item', receiptPrice:'Amount', receiptAddr:'Delivered to', receiptAddrValue:'My Future Savings Account',
+      receiptContribution:'Progress toward goal', receiptBack:'Back to Goal',
+      addGoal:'+ Add Goal', newGoalTitle:'Create New Goal', chooseIcon:'Choose an icon',
+      goalNameLabel:'Goal Name', goalNamePlaceholder:'e.g. New Laptop', goalAmountLabel:'Target Amount (KRW)',
+      goalAmountPlaceholder:'e.g. 1500000', goalSave:'Create Goal', goalCancel:'Cancel',
+      settingsTitle:'Set Your KakaoPay Link', settingsDesc:'Paste the personal code-remittance link you got from developers.kakaopay.com.',
+      settingsInputLabel:'My transfer link', settingsSave:'Save', settingsCancel:'Close',
+      settingsMissing:'Please add your KakaoPay link in settings first.',
+      settingsBankLabel:'Savings account bank', settingsBankPlaceholder:'e.g. KakaoBank',
+      settingsAccountLabel:'Savings account number', settingsAccountPlaceholder:'e.g. 3333-01-1234567',
+      payMyAccount:'🏦 Transfer to my own savings account', myAccTitle:'Transfer to My Savings Account',
+      myAccDesc:'Open your banking app and transfer to the account below.\nThe money stays yours from start to finish.',
+      myAccCopy:'Copy account number', myAccCopied:'Copied!', myAccDone:"I've transferred it", myAccCancel:'Cancel' },
+    ja: { brand:'Donmaggi', tabFood:'🍚 デリバリー', tabFashion:'👕 ファッション', tabBeauty:'💄 ビューティー',
+      goalName:'✈️ 済州島往復航空券', sectionTitle:'🔥 衝動買いゾーン', sectionSub:'今日の危機を選んでください',
+      stepPaid:'決済完了', stepPrep:'商品準備', stepShip:'配送中', stepDone:'配送完了',
+      currency:'ウォン', savedSuffix:'貯まった', groupClose:'閉じる',
+      confirmTemplate:(n,p)=>`今日 ${n} を我慢すると、<b>${p}</b>がそのままあなたの資産へ配送されます。<br>注文しますか?`,
+      confirmBuy:'購入する', confirmCancel:'やっぱりキャンセル', payTitle:'支払い方法を選択',
+      payLump:'一括払い', payShinhan:'シンハンカード (1234)', payKakaobank:'カカオバンクチェックカード',
+      payKakaopay:'💬 カカオペイ送金リンクで送る', payButton:'支払う',
+      authTitle:'本人認証', authDesc:'生体認証で決済を完了してください', authTouch:'タップして認証', authScanning:'認証中...',
+      kakaoTitle:'カカオペイで送金する', kakaoDesc:'ボタンを押すとカカオペイの送金画面が開きます。<br>送金完了後、この画面に戻ってきてください。',
+      kakaoHint:'タップするとカカオペイが開きます', kakaoDone:'送金完了しました', kakaoCancel:'キャンセル',
+      receiptTitle:'注文が完了しました', receiptSub:'マイ通帳へロケット配送中', receiptTag:'衝動買い防御成功レシート',
+      receiptProduct:'商品名', receiptPrice:'決済金額', receiptAddr:'配送先', receiptAddrValue:'未来の資産通帳',
+      receiptContribution:'節約で近づいた目標', receiptBack:'目標画面へ戻る',
+      addGoal:'+ 目標を追加', newGoalTitle:'新しい目標を作る', chooseIcon:'アイコンを選んでください',
+      goalNameLabel:'目標名', goalNamePlaceholder:'例: 新しいノートPC', goalAmountLabel:'目標金額(ウォン)',
+      goalAmountPlaceholder:'例: 1500000', goalSave:'目標を作成', goalCancel:'キャンセル',
+      settingsTitle:'カカオペイリンクの設定', settingsDesc:'developers.kakaopay.com で発行された、ご自身のコード送金リンクを貼り付けてください。',
+      settingsInputLabel:'自分の送金リンク', settingsSave:'保存する', settingsCancel:'閉じる',
+      settingsMissing:'先に設定画面でご自身のカカオペイリンクを登録してください。',
+      settingsBankLabel:'貯蓄口座の銀行', settingsBankPlaceholder:'例: カカオバンク',
+      settingsAccountLabel:'貯蓄口座番号', settingsAccountPlaceholder:'例: 3333-01-1234567',
+      payMyAccount:'🏦 自分の貯蓄口座へ直接振込', myAccTitle:'自分の貯蓄口座へ振り込む',
+      myAccDesc:'銀行アプリで下記の口座へ直接振り込んでください。\nお金は最初から最後まであなたのものです。',
+      myAccCopy:'口座番号をコピー', myAccCopied:'コピーしました!', myAccDone:'振込完了しました', myAccCancel:'キャンセル' },
+    zh: { brand:'Donmaggi', tabFood:'🍚 外卖', tabFashion:'👕 时尚', tabBeauty:'💄 美妆',
+      goalName:'✈️ 济州岛往返机票', sectionTitle:'🔥 冲动消费区', sectionSub:'选择今天的危机情况',
+      stepPaid:'已支付', stepPrep:'备货中', stepShip:'配送中', stepDone:'已送达',
+      currency:'韩元', savedSuffix:'已存', groupClose:'关闭',
+      confirmTemplate:(n,p)=>`今天忍住 ${n},<b>${p}</b>将原封不动地"配送"到你的未来资产。<br>要下单吗?`,
+      confirmBuy:'下单', confirmCancel:'算了,取消', payTitle:'选择支付方式',
+      payLump:'一次性付款', payShinhan:'新韩信用卡 (1234)', payKakaobank:'KakaoBank借记卡',
+      payKakaopay:'💬 通过KakaoPay转账链接发送', payButton:'立即支付',
+      authTitle:'身份验证', authDesc:'使用生物识别验证完成支付', authTouch:'轻触进行验证', authScanning:'验证中...',
+      kakaoTitle:'通过KakaoPay转账', kakaoDesc:'点击按钮打开KakaoPay转账界面。<br>完成转账后请返回此页面。',
+      kakaoHint:'轻触打开KakaoPay', kakaoDone:'已完成转账', kakaoCancel:'取消',
+      receiptTitle:'订单已完成', receiptSub:'正在火箭直送到我的账户', receiptTag:'成功抵制冲动消费收据',
+      receiptProduct:'商品名称', receiptPrice:'支付金额', receiptAddr:'配送地址', receiptAddrValue:'我的未来资产账户',
+      receiptContribution:'为目标增加的进度', receiptBack:'返回目标页面',
+      addGoal:'+ 添加目标', newGoalTitle:'创建新目标', chooseIcon:'请选择图标',
+      goalNameLabel:'目标名称', goalNamePlaceholder:'例如:新笔记本电脑', goalAmountLabel:'目标金额(韩元)',
+      goalAmountPlaceholder:'例如:1500000', goalSave:'创建目标', goalCancel:'取消',
+      settingsTitle:'设置我的KakaoPay链接', settingsDesc:'请粘贴您在developers.kakaopay.com开发者中心获取的个人代码转账链接。',
+      settingsInputLabel:'我的转账链接', settingsSave:'保存', settingsCancel:'关闭',
+      settingsMissing:'请先在设置中添加您的KakaoPay链接。',
+      settingsBankLabel:'储蓄账户银行', settingsBankPlaceholder:'例如:KakaoBank',
+      settingsAccountLabel:'储蓄账户号码', settingsAccountPlaceholder:'例如:3333-01-1234567',
+      payMyAccount:'🏦 直接转账到我的储蓄账户', myAccTitle:'转账到我的储蓄账户',
+      myAccDesc:'请打开银行App,直接转账到以下账户。\n这笔钱从头到尾都是您自己的。',
+      myAccCopy:'复制账号', myAccCopied:'已复制!', myAccDone:'已完成转账', myAccCancel:'取消' }
+  };
+
+  const FALLBACK_CATS = {
+    ko: {
+      food: { group: { emoji:'🌙', title:'홧김에 시키는 야식세트', desc:'족발 · 엽떡 · 치킨 중 오늘의 위기', maxPrice:32000, pickTitle:'오늘의 야식, 뭘로 참아볼까요?',
+        items:[ {name:'족발세트',price:30000,emoji:'🍖',statLabel:'오늘 절약한 칼로리',statValue:'850kcal'},
+                {name:'엽떡 매운맛 세트',price:28000,emoji:'🌶️',statLabel:'오늘 절약한 칼로리',statValue:'620kcal'},
+                {name:'치킨+맥주 세트',price:32000,emoji:'🍗',statLabel:'오늘 절약한 칼로리',statValue:'980kcal'} ] },
+        smalls:[ {label:'출근길 스트레스',name:'바닐라 라떼',price:5000,emoji:'☕',statLabel:'오늘 참은 당 섭취량',statValue:'42g'},
+                 {label:'홧김에 지르는',name:'살말 틴트',price:10000,emoji:'💄',statLabel:'오늘의 홧김 소비 욕구',statValue:'-1'} ] },
+      fashion: { group: { emoji:'🛍️', title:'홧김에 담는 무신사 장바구니', desc:'크롭후드 · 와이드팬츠 · 스니커즈 중 오늘의 위기', maxPrice:89000, pickTitle:'오늘의 지름 욕구, 뭘로 참아볼까요?',
+        items:[ {name:'오버핏 크롭후드',price:59000,emoji:'🧥',statLabel:'옷장 속 안 입는 옷',statValue:'+1 방지'},
+                {name:'와이드 팬츠',price:49000,emoji:'👖',statLabel:'옷장 속 안 입는 옷',statValue:'+1 방지'},
+                {name:'클래식 스니커즈',price:89000,emoji:'👟',statLabel:'옷장 속 안 입는 옷',statValue:'+1 방지'} ] },
+        smalls:[ {label:'스크롤하다 홧김에',name:'인스타 광고 니트',price:39000,emoji:'🧶',statLabel:'오늘 참은 광고 시간',statValue:'3초'},
+                 {label:'80% 세일 문자 보고',name:'세일 셔츠',price:32000,emoji:'👔',statLabel:'무시한 세일 알림',statValue:'5건'} ] },
+      beauty: { group: { emoji:'✨', title:'홧김에 담는 올리브영 장바구니', desc:'립틴트 · 쿠션팩트 · 마스카라 중 오늘의 위기', maxPrice:32000, pickTitle:'오늘의 홧김템, 뭘로 참아볼까요?',
+        items:[ {name:'글로시 립틴트',price:12000,emoji:'💋',statLabel:'화장대 위 물건',statValue:'+1 방지'},
+                {name:'쿠션 팩트',price:32000,emoji:'🎨',statLabel:'화장대 위 물건',statValue:'+1 방지'},
+                {name:'롱래시 마스카라',price:18000,emoji:'👁️',statLabel:'화장대 위 물건',statValue:'+1 방지'} ] },
+        smalls:[ {label:'유튜브 보다가',name:'추천템 세럼',price:45000,emoji:'🧴',statLabel:'저항한 광고 영상',statValue:'1건'},
+                 {label:'특가 알림 뜬',name:'향수',price:68000,emoji:'🌸',statLabel:'무시한 앱 알림',statValue:'1건'} ] }
+    },
+    en: {
+      food: { group: { emoji:'🌙', title:'Late-night delivery binge set', desc:'Pick your crisis: pork trotters · tteokbokki · chicken', maxPrice:32000, pickTitle:"Tonight's craving \u2014 which one are you resisting?",
+        items:[ {name:'Pork Trotters Set',price:30000,emoji:'🍖',statLabel:'Calories saved today',statValue:'850kcal'},
+                {name:'Spicy Tteokbokki Set',price:28000,emoji:'🌶️',statLabel:'Calories saved today',statValue:'620kcal'},
+                {name:'Chicken + Beer Set',price:32000,emoji:'🍗',statLabel:'Calories saved today',statValue:'980kcal'} ] },
+        smalls:[ {label:'Commute stress',name:'Vanilla Latte',price:5000,emoji:'☕',statLabel:'Sugar avoided today',statValue:'42g'},
+                 {label:'Impulse grab',name:'Lip Tint',price:10000,emoji:'💄',statLabel:'Urge-to-splurge meter',statValue:'-1'} ] },
+      fashion: { group: { emoji:'🛍️', title:'Impulse online cart', desc:'Pick your crisis: cropped hoodie · wide pants · sneakers', maxPrice:89000, pickTitle:"Today's shopping urge \u2014 which one are you resisting?",
+        items:[ {name:'Oversized Cropped Hoodie',price:59000,emoji:'🧥',statLabel:'Unworn closet items',statValue:'+1 avoided'},
+                {name:'Wide-leg Pants',price:49000,emoji:'👖',statLabel:'Unworn closet items',statValue:'+1 avoided'},
+                {name:'Classic Sneakers',price:89000,emoji:'👟',statLabel:'Unworn closet items',statValue:'+1 avoided'} ] },
+        smalls:[ {label:'Doom-scrolling urge',name:'Ad-scroll Knit',price:39000,emoji:'🧶',statLabel:'Ad resisted for',statValue:'3 sec'},
+                 {label:'80%-off text alert',name:'Sale Shirt',price:32000,emoji:'👔',statLabel:'Sale alerts ignored',statValue:'5'} ] },
+      beauty: { group: { emoji:'✨', title:'Impulse beauty cart', desc:'Pick your crisis: tint · cushion · mascara', maxPrice:32000, pickTitle:"Today's beauty urge \u2014 which one are you resisting?",
+        items:[ {name:'Glossy Tint',price:12000,emoji:'💋',statLabel:'Vanity clutter',statValue:'+1 avoided'},
+                {name:'Cushion Compact',price:32000,emoji:'🎨',statLabel:'Vanity clutter',statValue:'+1 avoided'},
+                {name:'Long-lash Mascara',price:18000,emoji:'👁️',statLabel:'Vanity clutter',statValue:'+1 avoided'} ] },
+        smalls:[ {label:'Saw it on YouTube',name:'Influencer Serum',price:45000,emoji:'🧴',statLabel:'Ad videos resisted',statValue:'1'},
+                 {label:'Flash sale alert',name:'Perfume',price:68000,emoji:'🌸',statLabel:'App notifications ignored',statValue:'1'} ] }
+    },
+    ja: {
+      food: { group: { emoji:'🌙', title:'衝動的な夜食セット', desc:'今日の危機を選んでください:豚足・トッポギ・チキン', maxPrice:32000, pickTitle:'今夜の夜食、どれを我慢する?',
+        items:[ {name:'豚足セット',price:30000,emoji:'🍖',statLabel:'今日節約したカロリー',statValue:'850kcal'},
+                {name:'激辛トッポギセット',price:28000,emoji:'🌶️',statLabel:'今日節約したカロリー',statValue:'620kcal'},
+                {name:'チキン+ビールセット',price:32000,emoji:'🍗',statLabel:'今日節約したカロリー',statValue:'980kcal'} ] },
+        smalls:[ {label:'出勤ストレス',name:'バニララテ',price:5000,emoji:'☕',statLabel:'今日我慢した糖分',statValue:'42g'},
+                 {label:'衝動買い',name:'ティント',price:10000,emoji:'💄',statLabel:'衝動買い欲求',statValue:'-1'} ] },
+      fashion: { group: { emoji:'🛍️', title:'衝動的なショッピングカート', desc:'今日の危機を選んでください:クロップパーカー・ワイドパンツ・スニーカー', maxPrice:89000, pickTitle:'今日の物欲、どれを我慢する?',
+        items:[ {name:'オーバーフィットクロップパーカー',price:59000,emoji:'🧥',statLabel:'着ない服',statValue:'+1防止'},
+                {name:'ワイドパンツ',price:49000,emoji:'👖',statLabel:'着ない服',statValue:'+1防止'},
+                {name:'クラシックスニーカー',price:89000,emoji:'👟',statLabel:'着ない服',statValue:'+1防止'} ] },
+        smalls:[ {label:'スクロール中に衝動的',name:'広告のニット',price:39000,emoji:'🧶',statLabel:'我慢した広告時間',statValue:'3秒'},
+                 {label:'セール通知を見て',name:'セールシャツ',price:32000,emoji:'👔',statLabel:'無視したセール通知',statValue:'5件'} ] },
+      beauty: { group: { emoji:'✨', title:'衝動的なコスメカート', desc:'今日の危機を選んでください:ティント・クッションファンデ・マスカラ', maxPrice:32000, pickTitle:'今日の衝動買い、どれを我慢する?',
+        items:[ {name:'グロッシーティント',price:12000,emoji:'💋',statLabel:'化粧台の物',statValue:'+1防止'},
+                {name:'クッションファンデ',price:32000,emoji:'🎨',statLabel:'化粧台の物',statValue:'+1防止'},
+                {name:'ロングラッシュマスカラ',price:18000,emoji:'👁️',statLabel:'化粧台の物',statValue:'+1防止'} ] },
+        smalls:[ {label:'YouTubeで見た',name:'おすすめ美容液',price:45000,emoji:'🧴',statLabel:'我慢した広告動画',statValue:'1件'},
+                 {label:'特価通知',name:'香水',price:68000,emoji:'🌸',statLabel:'無視したアプリ通知',statValue:'1件'} ] }
+    },
+    zh: {
+      food: { group: { emoji:'🌙', title:'一时冲动的夜宵套餐', desc:'选择今天的危机: 猪蹄 · 辣炒年糕 · 炸鸡', maxPrice:32000, pickTitle:'今晚的夜宵,要忍住哪一个?',
+        items:[ {name:'猪蹄套餐',price:30000,emoji:'🍖',statLabel:'今日节省卡路里',statValue:'850kcal'},
+                {name:'辣味炒年糕套餐',price:28000,emoji:'🌶️',statLabel:'今日节省卡路里',statValue:'620kcal'},
+                {name:'炸鸡+啤酒套餐',price:32000,emoji:'🍗',statLabel:'今日节省卡路里',statValue:'980kcal'} ] },
+        smalls:[ {label:'上班压力',name:'香草拿铁',price:5000,emoji:'☕',statLabel:'今日忍住的糖分',statValue:'42g'},
+                 {label:'一时冲动',name:'唇彩',price:10000,emoji:'💄',statLabel:'冲动消费欲望',statValue:'-1'} ] },
+      fashion: { group: { emoji:'🛍️', title:'冲动购物车', desc:'选择今天的危机: 短款卫衣 · 阔腿裤 · 运动鞋', maxPrice:89000, pickTitle:'今天的购物欲,要忍住哪一个?',
+        items:[ {name:'oversize短款卫衣',price:59000,emoji:'🧥',statLabel:'衣柜闲置衣物',statValue:'+1避免'},
+                {name:'阔腿裤',price:49000,emoji:'👖',statLabel:'衣柜闲置衣物',statValue:'+1避免'},
+                {name:'经典运动鞋',price:89000,emoji:'👟',statLabel:'衣柜闲置衣物',statValue:'+1避免'} ] },
+        smalls:[ {label:'刷手机时冲动',name:'广告款针织衫',price:39000,emoji:'🧶',statLabel:'成功忽略广告',statValue:'3秒'},
+                 {label:'80%折扣短信',name:'特卖衬衫',price:32000,emoji:'👔',statLabel:'忽略的促销通知',statValue:'5条'} ] },
+      beauty: { group: { emoji:'✨', title:'冲动美妆购物车', desc:'选择今天的危机: 唇彩 · 气垫 · 睫毛膏', maxPrice:32000, pickTitle:'今天的美妆冲动,要忍住哪一个?',
+        items:[ {name:'亮泽唇彩',price:12000,emoji:'💋',statLabel:'梳妆台物品',statValue:'+1避免'},
+                {name:'气垫粉底',price:32000,emoji:'🎨',statLabel:'梳妆台物品',statValue:'+1避免'},
+                {name:'浓密睫毛膏',price:18000,emoji:'👁️',statLabel:'梳妆台物品',statValue:'+1避免'} ] },
+        smalls:[ {label:'刷YouTube时看到',name:'网红推荐精华',price:45000,emoji:'🧴',statLabel:'抵制的广告视频',statValue:'1个'},
+                 {label:'特价提醒',name:'香水',price:68000,emoji:'🌸',statLabel:'忽略的App通知',statValue:'1个'} ] }
+    }
+  };
+
+  // ---------- 상품 카탈로그: 원격에서 불러오기 ----------
+  // CATALOG_URL을 서버/API 엔드포인트로 바꾸면 앱을 다시 배포하지 않아도 상품·가격이 갱신됩니다.
+  // 설정(⚙️) 화면에서 URL을 직접 넣을 수도 있습니다. 비워두면 같은 폴더의 products.json을 씁니다.
+  let CATS = FALLBACK_CATS;
+  let CATALOG_URL = localStorage.getItem('donmaggi_catalog_url') || 'products.json';
+
+  function isValidCatalog(j) {
+    return j && j.ko && j.ko.food && Array.isArray(j.ko.food.smalls);
+  }
+
+  function applyCatalog(j, source) {
+    CATS = j;
+    // 현재 언어에 없는 카탈로그면 ko로 폴백
+    if (!CATS[currentLang]) CATS[currentLang] = CATS.ko;
+    renderZone(activeTab);
+    const el = document.getElementById('catalogStatus');
+    if (el) el.textContent = source;
+  }
+
+  async function refreshCatalog() {
+    // 1순위: 직전에 성공한 캐시를 즉시 적용 (오프라인에서도 최신 상태 유지)
+    try {
+      const cached = localStorage.getItem('donmaggi_catalog_cache');
+      if (cached) {
+        const j = JSON.parse(cached);
+        if (isValidCatalog(j)) applyCatalog(j, '저장된 목록');
+      }
+    } catch (e) {}
+
+    // 2순위: 네트워크에서 최신본 가져오기
+    try {
+      const res = await fetch(CATALOG_URL + (CATALOG_URL.includes('?') ? '&' : '?') + 't=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error(res.status);
+      const j = await res.json();
+      if (!isValidCatalog(j)) throw new Error('형식 오류');
+      localStorage.setItem('donmaggi_catalog_cache', JSON.stringify(j));
+      localStorage.setItem('donmaggi_catalog_at', new Date().toISOString());
+      applyCatalog(j, '갱신됨 ' + new Date().toLocaleTimeString('ko-KR'));
+    } catch (e) {
+      const el = document.getElementById('catalogStatus');
+      if (el) el.textContent = '갱신 실패 (저장된 목록 사용)';
+    }
+  }
+
+
+  function priceLabel(price) { return fmt(price) + T[currentLang].currency; }
+
+  // ---------- 목표 칩 & 목표 카드 ----------
+  function renderGoalChips() {
+    let html = '';
+    goals.forEach(g => {
+      const pct = Math.min(100, Math.round((g.saved / g.target) * 100));
+      const name = g.id === 'default' ? T[currentLang].goalName.replace(/^\S+\s/, '') : g.name;
+      html += `<div class="chip ${g.id === activeGoalId ? 'active' : ''}" onclick="setActiveGoal('${g.id}')">${g.emoji} ${name} <span class="pct">${pct}%</span></div>`;
+    });
+    html += `<div class="chip-add" onclick="openNewGoal()">+</div>`;
+    document.getElementById('goalChips').innerHTML = html;
+  }
+
+  function setActiveGoal(id) {
+    activeGoalId = id;
+    saveState();
+    renderGoalChips();
+    renderGoal();
+  }
+
+  function renderGoal() {
+    const t = T[currentLang];
+    const g = activeGoal();
+    const pct = Math.min(100, Math.round((g.saved / g.target) * 100));
+    document.getElementById('goalNameText').textContent = goalDisplayName(g);
+    document.getElementById('goalPct').textContent = pct + '%';
+    document.getElementById('goalAmt').textContent = `${fmt(g.saved)}${t.currency} / ${fmt(g.target)}${t.currency} ${t.savedSuffix}`;
+    document.getElementById('gaugeFill').style.width = pct + '%';
+    document.getElementById('gaugePlane').style.left = pct + '%';
+    document.getElementById('stepPaid').textContent = t.stepPaid;
+    document.getElementById('stepPrep').textContent = t.stepPrep;
+    document.getElementById('stepShip').textContent = t.stepShip;
+    document.getElementById('stepDone').textContent = t.stepDone;
+    document.getElementById('stepShip').classList.toggle('done', pct >= 90);
+    document.getElementById('stepDone').classList.toggle('done', pct >= 100);
+  }
+
+  // ---------- 새 목표 만들기 ----------
+  function openNewGoal() {
+    selectedNewEmoji = EMOJI_CHOICES[0];
+    document.getElementById('newGoalName').value = '';
+    document.getElementById('newGoalAmount').value = '';
+    document.getElementById('newGoalName').placeholder = T[currentLang].goalNamePlaceholder;
+    document.getElementById('newGoalAmount').placeholder = T[currentLang].goalAmountPlaceholder;
+    renderEmojiGrid();
+    openOverlay('ovNewGoal');
+  }
+
+  function renderEmojiGrid() {
+    let html = '';
+    EMOJI_CHOICES.forEach(e => {
+      html += `<div class="emoji-opt ${e === selectedNewEmoji ? 'selected' : ''}" onclick="selectEmoji('${e}')">${e}</div>`;
+    });
+    document.getElementById('emojiGrid').innerHTML = html;
+  }
+
+  function selectEmoji(e) {
+    selectedNewEmoji = e;
+    renderEmojiGrid();
+  }
+
+  function saveNewGoal() {
+    const name = document.getElementById('newGoalName').value.trim();
+    const amount = parseInt(document.getElementById('newGoalAmount').value, 10);
+    if (!name || !amount || amount <= 0) return;
+    const id = 'g' + Date.now();
+    goals.push({ id, emoji: selectedNewEmoji, name, target: amount, saved: 0 });
+    activeGoalId = id;
+    saveState();
+    closeOverlay('ovNewGoal');
+    renderGoalChips();
+    renderGoal();
+  }
+
+  // ---------- 정적 UI 문구 ----------
+  function applyStaticText() {
+    const t = T[currentLang];
+    document.getElementById('brandText').textContent = t.brand;
+    document.getElementById('tab-food').textContent = t.tabFood;
+    document.getElementById('tab-fashion').textContent = t.tabFashion;
+    document.getElementById('tab-beauty').textContent = t.tabBeauty;
+    document.getElementById('sectionTitleText').textContent = t.sectionTitle;
+    document.getElementById('sectionSubText').textContent = t.sectionSub;
+    document.getElementById('groupCloseBtn').textContent = t.groupClose;
+    document.getElementById('confirmBuyBtn').textContent = t.confirmBuy;
+    document.getElementById('confirmCancelBtn').textContent = t.confirmCancel;
+    document.getElementById('payTitleText').textContent = t.payTitle;
+    document.getElementById('payLumpLabel').textContent = t.payLump;
+    document.getElementById('payShinhanLabel').textContent = t.payShinhan;
+    document.getElementById('payKakaobankLabel').textContent = t.payKakaobank;
+    document.getElementById('payKakaopayLabel').textContent = t.payKakaopay;
+    document.getElementById('payButtonText').textContent = t.payButton;
+    document.getElementById('authTitleText').textContent = t.authTitle;
+    document.getElementById('authDescText').textContent = t.authDesc;
+    document.getElementById('authStatus').textContent = t.authTouch;
+    document.getElementById('kakaoTitleText').textContent = t.kakaoTitle;
+    document.getElementById('kakaoDescText').innerHTML = t.kakaoDesc;
+    document.getElementById('kakaoHintText').textContent = t.kakaoHint;
+    document.getElementById('kakaoDoneBtn').textContent = t.kakaoDone;
+    document.getElementById('kakaoCancelBtn').textContent = t.kakaoCancel;
+    document.getElementById('receiptTitleText').textContent = t.receiptTitle;
+    document.getElementById('receiptSubText').textContent = t.receiptSub;
+    document.getElementById('receiptTagText').textContent = t.receiptTag;
+    document.getElementById('receiptProductLabel').textContent = t.receiptProduct;
+    document.getElementById('receiptPriceLabel').textContent = t.receiptPrice;
+    document.getElementById('receiptAddrLabel').textContent = t.receiptAddr;
+    document.getElementById('receiptAddrValue').textContent = t.receiptAddrValue;
+    document.getElementById('receiptContributionLabel').textContent = t.receiptContribution;
+    document.getElementById('receiptBackBtn').textContent = t.receiptBack;
+    document.getElementById('newGoalTitleText').textContent = t.newGoalTitle;
+    document.getElementById('chooseIconText').textContent = t.chooseIcon;
+    document.getElementById('goalNameLabelText').textContent = t.goalNameLabel;
+    document.getElementById('goalAmountLabelText').textContent = t.goalAmountLabel;
+    document.getElementById('goalSaveBtn').textContent = t.goalSave;
+    document.getElementById('goalCancelBtn').textContent = t.goalCancel;
+    document.getElementById('settingsTitleText').textContent = t.settingsTitle;
+    document.getElementById('settingsDescText').textContent = t.settingsDesc;
+    document.getElementById('settingsInputLabelText').textContent = t.settingsInputLabel;
+    document.getElementById('settingsSaveBtn').textContent = t.settingsSave;
+    document.getElementById('settingsCancelBtn').textContent = t.settingsCancel;
+    document.getElementById('settingsBankLabelText').textContent = t.settingsBankLabel;
+    document.getElementById('settingsAccountLabelText').textContent = t.settingsAccountLabel;
+    document.getElementById('payMyAccountLabel').textContent = t.payMyAccount;
+    document.getElementById('myAccTitleText').textContent = t.myAccTitle;
+    document.getElementById('myAccDescText').textContent = t.myAccDesc;
+    document.getElementById('myAccCopyBtn').textContent = t.myAccCopy;
+    document.getElementById('myAccDoneBtn').textContent = t.myAccDone;
+    document.getElementById('myAccCancelBtn').textContent = t.myAccCancel;
+  }
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    ['ko','en','ja','zh'].forEach(l => document.getElementById('lang-' + l).classList.toggle('active', l === lang));
+    applyStaticText();
+    renderGoalChips();
+    renderGoal();
+    renderZone(activeTab);
+    saveState();
+  }
+
+  function switchTab(key) {
+    activeTab = key;
+    ['food','fashion','beauty'].forEach(k => document.getElementById('tab-' + k).classList.toggle('active', k === key));
+    renderZone(key);
+  }
+
+  function renderZone(key) {
+    const cat = CATS[currentLang][key];
+    const g = cat.group;
+    let html = `
+      <div class="card-lg" onclick="openGroupPicker('${key}')">
+        <div class="emoji">${g.emoji}</div>
+        <div class="info"><div class="title">${g.title}</div><div class="desc">${g.desc}</div></div>
+        <div class="price">~${priceLabel(g.maxPrice)}</div>
+      </div>
+      <div class="row-2">`;
+    cat.smalls.forEach((s, idx) => {
+      html += `
+        <div class="card-sm" onclick="openConfirmFromSmall('${key}', ${idx})">
+          <div class="emoji">${s.emoji}</div>
+          <div class="label">${s.label}</div>
+          <div class="title">${s.name}</div>
+          <div class="price">${priceLabel(s.price)}</div>
+        </div>`;
+    });
+    html += `</div>`;
+    document.getElementById('zone').innerHTML = html;
+  }
+
+  function openOverlay(id) { document.getElementById(id).classList.add('open'); }
+  function closeOverlay(id) { document.getElementById(id).classList.remove('open'); }
+
+  function openGroupPicker(key) {
+    const g = CATS[currentLang][key].group;
+    document.getElementById('groupTitle').textContent = g.emoji + ' ' + g.pickTitle;
+    let html = '';
+    g.items.forEach((item, idx) => {
+      html += `<div class="list-item" onclick="pickGroupItem('${key}', ${idx})">
+        <span>${item.emoji} ${item.name}</span><span class="p">${priceLabel(item.price)}</span>
+      </div>`;
+    });
+    document.getElementById('groupList').innerHTML = html;
+    openOverlay('ovGroup');
+  }
+
+  function pickGroupItem(key, idx) {
+    closeOverlay('ovGroup');
+    openConfirm(CATS[currentLang][key].group.items[idx]);
+  }
+
+  function openConfirmFromSmall(key, idx) {
+    openConfirm(CATS[currentLang][key].smalls[idx]);
+  }
+
+  function openConfirm(item) {
+    current = item;
+    const t = T[currentLang];
+    document.getElementById('cfTitle').textContent = item.emoji + ' ' + item.name;
+    document.getElementById('cfBox').innerHTML = t.confirmTemplate(item.name, priceLabel(item.price));
+    openOverlay('ovConfirm');
+  }
+
+  function openPayment() {
+    closeOverlay('ovConfirm');
+    document.getElementById('payAmt').textContent = priceLabel(current.price);
+    openOverlay('ovPay');
+  }
+
+  function selectCard(el) {
+    document.querySelectorAll('.card-option').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedMethod = el.dataset.method;
+  }
+
+  function handlePayClick() {
+    closeOverlay('ovPay');
+    if (selectedMethod === 'kakaopay') {
+      if (!KAKAO_LINK) {
+        openSettings();
+        return;
+      }
+      openOverlay('ovKakao');
+    } else if (selectedMethod === 'myaccount') {
+      if (!MY_BANK || !MY_ACCOUNT) {
+        openSettings();
+        return;
+      }
+      openMyAccountSheet();
+    } else {
+      document.getElementById('authStatus').textContent = T[currentLang].authTouch;
+      document.getElementById('fingerBtn').classList.remove('scanning');
+      openOverlay('ovAuth');
+    }
+  }
+
+  function runAuth() {
+    const btn = document.getElementById('fingerBtn');
+    btn.classList.add('scanning');
+    document.getElementById('authStatus').textContent = T[currentLang].authScanning;
+    setTimeout(() => { closeOverlay('ovAuth'); showReceipt(); }, 900);
+  }
+
+  function openKakaoLink() {
+    if (!KAKAO_LINK) {
+      closeOverlay('ovKakao');
+      openSettings();
+      return;
+    }
+    window.open(KAKAO_LINK, '_blank');
+  }
+  function confirmKakaoSent() { closeOverlay('ovKakao'); showReceipt(); }
+
+  function openSettings() {
+    document.getElementById('myKakaoLinkInput').value = KAKAO_LINK;
+    document.getElementById('myBankInput').value = MY_BANK;
+    document.getElementById('myAccountInput').value = MY_ACCOUNT;
+    document.getElementById('myBankInput').placeholder = T[currentLang].settingsBankPlaceholder;
+    document.getElementById('myAccountInput').placeholder = T[currentLang].settingsAccountPlaceholder;
+    document.getElementById('catalogUrlInput').value = CATALOG_URL;
+    const at = localStorage.getItem('donmaggi_catalog_at');
+    document.getElementById('catalogStatus').textContent = at ? '마지막 갱신 ' + new Date(at).toLocaleString('ko-KR') : '아직 갱신 안 됨';
+    openOverlay('ovSettings');
+  }
+
+  function saveSettings() {
+    KAKAO_LINK = document.getElementById('myKakaoLinkInput').value.trim();
+    MY_BANK = document.getElementById('myBankInput').value.trim();
+    MY_ACCOUNT = document.getElementById('myAccountInput').value.trim();
+    localStorage.setItem('myKakaoLink', KAKAO_LINK);
+    localStorage.setItem('myBank', MY_BANK);
+    localStorage.setItem('myAccount', MY_ACCOUNT);
+    const newUrl = document.getElementById('catalogUrlInput').value.trim() || 'products.json';
+    if (newUrl !== CATALOG_URL) {
+      CATALOG_URL = newUrl;
+      localStorage.setItem('donmaggi_catalog_url', CATALOG_URL);
+      localStorage.removeItem('donmaggi_catalog_cache');
+      refreshCatalog();
+    }
+    closeOverlay('ovSettings');
+  }
+
+  function openMyAccountSheet() {
+    const t = T[currentLang];
+    document.getElementById('myAccBankShow').textContent = MY_BANK;
+    document.getElementById('myAccNumShow').textContent = MY_ACCOUNT;
+    document.getElementById('myAccAmtShow').textContent = priceLabel(current.price);
+    document.getElementById('myAccCopyBtn').textContent = t.myAccCopy;
+    openOverlay('ovMyAccount');
+  }
+
+  function copyMyAccount() {
+    navigator.clipboard.writeText(MY_ACCOUNT).then(() => {
+      document.getElementById('myAccCopyBtn').textContent = T[currentLang].myAccCopied;
+      setTimeout(() => {
+        document.getElementById('myAccCopyBtn').textContent = T[currentLang].myAccCopy;
+      }, 1500);
+    });
+  }
+
+  function confirmMyAccountSent() { closeOverlay('ovMyAccount'); showReceipt(); }
+
+  function showReceipt() {
+    const g = activeGoal();
+    g.saved = Math.min(g.target, g.saved + current.price);
+    saveState();
+    document.getElementById('rcName').textContent = current.name;
+    document.getElementById('rcPrice').textContent = priceLabel(current.price);
+    document.getElementById('rcStatLabel').textContent = current.statLabel;
+    document.getElementById('rcStat').textContent = current.statValue;
+    const pct = Math.round((current.price / g.target) * 1000) / 10;
+    document.getElementById('rcGoalPct').textContent = '+' + pct + '%';
+    document.getElementById('ovReceipt').classList.add('open');
+  }
+
+  function finishReceipt() {
+    document.getElementById('ovReceipt').classList.remove('open');
+    renderGoalChips();
+    renderGoal();
+  }
+
+  setLanguage(currentLang);
+  switchTab('food');
+  refreshCatalog();
+  // 앱을 다시 열 때마다 최신 목록 확인
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshCatalog(); });
+
+  // ---------- 서비스 워커 등록 (오프라인 실행) ----------
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+</script>
+
+</body>
+</html>

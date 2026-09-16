@@ -1,5 +1,5 @@
 // 버전을 올리면 사용자 기기의 캐시가 새로 갱신됩니다.
-const CACHE = 'donmaggi-v3';
+const CACHE = 'donmaggi-v4';
 const ASSETS = [
   './',
   './index.html',

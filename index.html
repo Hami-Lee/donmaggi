@@ -133,6 +133,73 @@
   .field input { width: 100%; height: 46px; border-radius: 10px; border: 1px solid #ece9df; padding: 0 12px; font-size: 14px; font-family: inherit; }
   .field input:focus { outline: none; border-color: #1a1a1a; }
 
+  /* ---------- 넛지 배너 (취약 시간대 / 재참여) ---------- */
+  .nudge { margin: 0 16px 12px; background: #fff7f3; border: 1px solid #ffd9c7; border-radius: 14px; padding: 12px 14px; display: none; align-items: center; gap: 10px; }
+  .nudge.show { display: flex; }
+  .nudge .n-emoji { font-size: 20px; flex-shrink: 0; }
+  .nudge .n-body { flex: 1; font-size: 12px; color: #b0491f; line-height: 1.45; }
+  .nudge .n-cta { flex-shrink: 0; background: #ff6b3d; color: #fff; border: none; border-radius: 999px; padding: 7px 12px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .nudge .n-close { flex-shrink: 0; color: #d9a892; font-size: 15px; cursor: pointer; padding: 0 2px; }
+
+  /* ---------- 스트릭 / 도구 줄 ---------- */
+  .tool-row { display: flex; gap: 8px; padding: 0 16px; margin-bottom: 12px; }
+  .tool-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; background: #fff; border: 1px solid #ece9df; border-radius: 12px; padding: 9px 6px; font-size: 11px; font-weight: 700; color: #666; cursor: pointer; font-family: inherit; }
+  .tool-btn .t-num { color: #ff6b3d; }
+  .tool-btn.hot { border-color: #ffd9c7; background: #fff7f3; color: #b0491f; }
+
+  /* ---------- 퀵로그 ---------- */
+  .quick-amt-wrap { position: relative; margin-bottom: 14px; }
+  .quick-amt-wrap input { width: 100%; height: 64px; border-radius: 14px; border: 1px solid #ece9df; padding: 0 44px 0 16px; font-size: 24px; font-weight: 800; font-family: inherit; text-align: right; }
+  .quick-amt-wrap input:focus { outline: none; border-color: #1a1a1a; }
+  .quick-amt-wrap .unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 14px; color: #999; font-weight: 700; pointer-events: none; }
+  .amt-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .amt-chip { flex: 1 0 auto; background: #f7f6f1; border: 1px solid #ece9df; border-radius: 999px; padding: 8px 10px; font-size: 12px; font-weight: 700; color: #666; cursor: pointer; font-family: inherit; }
+  .amt-chip:active { background: #fff; border-color: #1a1a1a; }
+  .src-note { font-size: 11px; color: #b5b2a8; margin: -8px 0 14px; }
+
+  /* ---------- 인사이트 (패턴 대시보드) ---------- */
+  .stat-grid { display: flex; gap: 8px; margin-bottom: 20px; }
+  .stat-box { flex: 1; background: #f7f6f1; border-radius: 12px; padding: 11px 8px; text-align: center; }
+  .stat-box .s-val { font-size: 15px; font-weight: 800; color: #1a1a1a; }
+  .stat-box .s-key { font-size: 10px; color: #999; margin-top: 3px; }
+  .chart-title { font-size: 12px; font-weight: 700; color: #666; margin: 0 0 10px; }
+  .chart { margin-bottom: 20px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .bar-label { width: 48px; flex-shrink: 0; font-size: 11px; color: #999; text-align: right; }
+  .bar-track { flex: 1; height: 16px; background: #f4f2eb; border-radius: 5px; overflow: hidden; }
+  .bar-fill { height: 100%; background: linear-gradient(90deg,#ffb199,#ff6b3d); border-radius: 5px; transition: width .4s ease; }
+  .bar-fill.dim { background: #ddd8c9; }
+  .bar-val { width: 26px; flex-shrink: 0; font-size: 11px; font-weight: 700; color: #666; }
+  .empty-note { font-size: 13px; color: #999; line-height: 1.6; text-align: center; padding: 26px 8px; }
+  .hint-box { background: #f7f6f1; border-radius: 12px; padding: 12px 14px; font-size: 12px; color: #666; line-height: 1.5; margin-bottom: 16px; }
+  .hint-box b { color: #ff6b3d; }
+
+  /* ---------- 주간 리포트 ---------- */
+  .report-hero { text-align: center; padding: 6px 0 18px; }
+  .report-hero .r-amt { font-size: 34px; font-weight: 800; color: #1a1a1a; letter-spacing: -1px; }
+  .report-hero .r-cap { font-size: 12px; color: #999; margin-top: 4px; }
+  .report-delta { display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 999px; }
+  .report-delta.up { background: #fff7f3; color: #ff6b3d; }
+  .report-delta.down { background: #f1f4f8; color: #7c8aa0; }
+  .report-rows { border-top: 1px solid #f1efe8; padding-top: 14px; }
+
+  /* ---------- 배지 / 마일스톤 ---------- */
+  .badge-row { display: flex; gap: 8px; margin-bottom: 4px; }
+  .badge { flex: 1; text-align: center; background: #f7f6f1; border-radius: 12px; padding: 12px 6px; opacity: .4; }
+  .badge.earned { opacity: 1; background: #fff7f3; border: 1px solid #ffd9c7; }
+  .badge .b-emoji { font-size: 20px; }
+  .badge .b-label { font-size: 10px; color: #999; margin-top: 4px; font-weight: 700; }
+  .badge.earned .b-label { color: #b0491f; }
+  .celebrate { font-size: 46px; text-align: center; margin-bottom: 10px; animation: pop .5s ease; }
+  @keyframes pop { 0% { transform: scale(.4); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+
+  /* ---------- 설정 토글 ---------- */
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid #f1efe8; }
+  .toggle-row .tg-label { font-size: 13px; font-weight: 700; }
+  .toggle-row .tg-desc { font-size: 11px; color: #999; margin-top: 3px; line-height: 1.4; }
+  .tg-btn { flex-shrink: 0; border: 1px solid #ece9df; background: #fff; border-radius: 999px; padding: 7px 14px; font-size: 11px; font-weight: 700; color: #666; cursor: pointer; font-family: inherit; }
+  .tg-btn.on { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
   /* ---------- 앱(설치) 모드 / 모바일: 목업 프레임 제거하고 전체화면 ---------- */
   @media (display-mode: standalone), (display-mode: fullscreen), (max-width: 480px) {
     html, body { height: 100%; overscroll-behavior: none; }
@@ -192,6 +259,20 @@
     </div>
   </div>
 
+  <!-- 취약 시간대 / 재참여 넛지 -->
+  <div class="nudge" id="nudgeBar">
+    <div class="n-emoji" id="nudgeEmoji">🌙</div>
+    <div class="n-body" id="nudgeText"></div>
+    <button class="n-cta" id="nudgeCta" onclick="nudgeAction()"></button>
+    <div class="n-close" onclick="dismissNudge()">✕</div>
+  </div>
+
+  <div class="tool-row">
+    <button class="tool-btn" id="btnQuickLog" onclick="openQuickLog()"></button>
+    <button class="tool-btn" id="btnStreak" onclick="openStreak()"></button>
+    <button class="tool-btn" id="btnInsights" onclick="openInsights()"></button>
+  </div>
+
   <div class="section-title" id="sectionTitleText"></div>
   <div class="section-sub" id="sectionSubText"></div>
   <div class="zone" id="zone"></div>
@@ -219,6 +300,13 @@
         <input type="url" id="catalogUrlInput" placeholder="products.json 또는 https://...">
         <div style="font-size:11px;color:#bbb;margin-top:5px" id="catalogStatus"></div>
       </div>
+      <div class="toggle-row">
+        <div>
+          <div class="tg-label" id="notifyLabelText"></div>
+          <div class="tg-desc" id="notifyDescText"></div>
+        </div>
+        <button class="tg-btn" id="notifyBtn" onclick="toggleNotify()"></button>
+      </div>
       <button class="primary" id="settingsSaveBtn" onclick="saveSettings()"></button>
       <button class="ghost" id="settingsCancelBtn" onclick="closeOverlay('ovSettings')"></button>
       <button class="ghost" onclick="resetState()" style="height:36px;font-size:12px;color:#c0392b">↺ Reset</button>
@@ -240,6 +328,7 @@
         <label id="goalAmountLabelText"></label>
         <input type="number" id="newGoalAmount" min="1000" step="1000">
       </div>
+      <div class="hint-box" id="goalSuggestBox" style="display:none;cursor:pointer" onclick="applyGoalSuggest()"></div>
       <button class="primary" id="goalSaveBtn" onclick="saveNewGoal()"></button>
       <button class="ghost" id="goalCancelBtn" onclick="closeOverlay('ovNewGoal')"></button>
     </div>
@@ -342,6 +431,68 @@
     </div>
   </div>
 
+  <!-- 빠른 기록 (공유시트 / 바로가기 / 넛지 유입) -->
+  <div class="overlay" id="ovQuick">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="quickTitleText"></h3>
+      <p class="sheet-desc" id="quickDescText"></p>
+      <div class="quick-amt-wrap">
+        <input type="number" id="quickAmount" inputmode="numeric" min="100" step="100" placeholder="0">
+        <span class="unit" id="quickUnitText"></span>
+      </div>
+      <div class="amt-chips" id="quickChips"></div>
+      <div class="field">
+        <label id="quickNameLabelText"></label>
+        <input type="text" id="quickName" maxlength="30">
+      </div>
+      <div class="src-note" id="quickSrcNote"></div>
+      <button class="primary" id="quickSaveBtn" onclick="saveQuickLog()"></button>
+      <button class="ghost" id="quickCancelBtn" onclick="closeQuickLog()"></button>
+    </div>
+  </div>
+
+  <!-- 내 패턴 (개인화 대시보드) -->
+  <div class="overlay" id="ovInsights">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="insightsTitleText"></h3>
+      <div id="insightsBody"></div>
+      <button class="ghost" id="insightsCloseBtn" onclick="closeOverlay('ovInsights')"></button>
+    </div>
+  </div>
+
+  <!-- 주간 리포트 -->
+  <div class="overlay" id="ovReport">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="reportTitleText"></h3>
+      <div id="reportBody"></div>
+      <button class="primary" id="reportCloseBtn" onclick="closeOverlay('ovReport')"></button>
+    </div>
+  </div>
+
+  <!-- 스트릭 & 배지 -->
+  <div class="overlay" id="ovStreak">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="streakTitleText"></h3>
+      <div id="streakBody"></div>
+      <button class="ghost" id="streakCloseBtn" onclick="closeOverlay('ovStreak')"></button>
+    </div>
+  </div>
+
+  <!-- 마일스톤 축하 -->
+  <div class="overlay" id="ovMilestone">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="celebrate">🎉</div>
+      <h3 class="sheet-title" style="text-align:center" id="milestoneTitleText"></h3>
+      <p class="sheet-desc" style="text-align:center" id="milestoneDescText"></p>
+      <button class="primary" id="milestoneCloseBtn" onclick="closeOverlay('ovMilestone')"></button>
+    </div>
+  </div>
+
   <div class="receipt-screen" id="ovReceipt">
     <div class="rocket">🚀</div>
     <h2 id="receiptTitleText"></h2>
@@ -383,6 +534,10 @@
     localStorage.removeItem('donmaggi_goals');
     localStorage.removeItem('donmaggi_activeGoal');
     localStorage.removeItem('donmaggi_catalog_cache');
+    localStorage.removeItem('donmaggi_events');
+    localStorage.removeItem('donmaggi_milestones');
+    localStorage.removeItem('donmaggi_report_week');
+    localStorage.removeItem('donmaggi_nudge_at');
     location.reload();
   }
 
@@ -429,7 +584,38 @@
       myAccDesc:'은행 앱에서 아래 계좌로 직접 이체해주세요.\n돈은 처음부터 끝까지 내 것입니다.',
       myAccCopy:'계좌번호 복사', myAccCopied:'복사됐어요!', myAccDone:'이체 완료했어요', myAccCancel:'취소',
       myAccFormDesc:'돈을 보낼 내 저축 계좌를 입력해주세요.\n한 번만 넣으면 다음부터는 바로 뜹니다.',
-      myAccBankLabel:'은행', myAccNumLabel:'계좌번호', myAccSave:'저장하고 계속하기', myAccEdit:'계좌 바꾸기' },
+      myAccBankLabel:'은행', myAccNumLabel:'계좌번호', myAccSave:'저장하고 계속하기', myAccEdit:'계좌 바꾸기',
+      // ---- 고도화: 개입 지점 / 개인화 / 리텐션 ----
+      btnQuick:'⚡ 빠른 기록', btnStreakUnit:'일', btnInsights:'📊 내 패턴',
+      quickTitle:'참은 금액 기록하기', quickDesc:'방금 참은 금액을 넣으면 그대로 목표로 배송됩니다.',
+      quickNameLabel:'무엇을 참았나요? (선택)', quickNamePlaceholder:'예: 야식 배달',
+      quickSave:'목표로 배송하기', quickCancel:'취소', quickDefaultName:'충동구매 방어',
+      quickSrcShare:'공유하기로 들어왔어요. 금액이 맞는지 확인해주세요.',
+      quickSrcShortcut:'홈 화면 바로가기로 들어왔어요.',
+      quickSrcNudge:'알림을 보고 들어왔어요.',
+      nudgePersonal:(h)=>`${h}는 평소 충동이 오는 시간대예요. 사기 전에 여기 먼저 눌러보세요.`,
+      nudgeGeneric:'늦은 시간엔 지갑이 헐거워집니다. 사기 전에 여기 먼저 눌러보세요.',
+      nudgeCta:'기록', nudgeComeback:(a)=>`오랜만이에요. 지금까지 ${a} 막아뒀어요.`,
+      insightsTitle:'📊 내 충동 패턴',
+      insightsEmpty:'아직 기록이 없어요. 한 번이라도 참으면 여기에 패턴이 쌓입니다.',
+      insightsTotal:'총 막은 돈', insightsCount:'막은 횟수', insightsAvg:'1회 평균',
+      insightsByHour:'시간대별', insightsByDay:'요일별', insightsByCat:'카테고리별', insightsBySrc:'유입 경로별',
+      insightsHintPersonal:(h)=>`충동이 가장 자주 오는 시간대는 <b>${h}</b>입니다. 알림을 켜두면 그 시간에 맞춰 알려드려요.`,
+      insightsHintGeneric:'기록이 5번 넘게 쌓이면 취약 시간대를 찾아 알림 시간을 맞춰드립니다.',
+      insightsClose:'닫기',
+      srcManual:'앱에서 직접', srcShare:'공유하기', srcShortcut:'바로가기', srcNudge:'알림',
+      reportTitle:'지난주 리포트', reportCap:'지난주에 막은 돈',
+      reportUp:(p)=>`전주보다 ${p}% 더 막았어요`, reportDown:(p)=>`전주보다 ${p}% 줄었어요`,
+      reportFlat:'전주와 비슷해요', reportCount:'막은 횟수', reportPrev:'전주',
+      reportClose:'좋아요', reportEmpty:'지난주 기록이 없어요.',
+      streakTitle:'🔥 저항 스트릭', streakNow:'연속 기록', streakBest:'최고 기록',
+      streakFreeze:'보호권', streakFreezeLeft:'남음', streakFreezeUsed:'사용함',
+      streakHint:'하루에 한 번만 기록해도 스트릭이 이어집니다. 하루 빠뜨려도 보호권 1회가 대신 막아줘요.',
+      badge7:'7일', badge30:'30일', badge100:'100일', streakClose:'닫기',
+      milestoneTitle:(a)=>`${a} 돌파!`, milestoneDesc:'안 쓰기로 한 돈이 여기까지 쌓였어요.', milestoneClose:'계속하기',
+      notifyLabel:'취약 시간대 알림', notifyDesc:'충동이 오는 시간대 직전에 알려드립니다.',
+      notifyOn:'켜짐', notifyOff:'켜기', notifyBlocked:'차단됨', notifyUnsupported:'지원 안 함',
+      goalSuggest:(a)=>`최근 4주 기록이면 3개월에 <b>${a}</b> 정도 모을 수 있어요. 눌러서 채우기` },
     en: { brand:'Donmaggi', tabFood:'🍚 Delivery', tabFashion:'👕 Fashion', tabBeauty:'💄 Beauty',
       goalName:'✈️ Round-trip Flight to Jeju', sectionTitle:'🔥 Impulse Zone', sectionSub:"Pick today's crisis",
       stepPaid:'Paid', stepPrep:'Preparing', stepShip:'Shipping', stepDone:'Delivered',
@@ -456,7 +642,38 @@
       myAccDesc:'Open your banking app and transfer to the account below.\nThe money stays yours from start to finish.',
       myAccCopy:'Copy account number', myAccCopied:'Copied!', myAccDone:"I've transferred it", myAccCancel:'Cancel',
       myAccFormDesc:'Enter the savings account you want to send money to.\nYou only need to do this once.',
-      myAccBankLabel:'Bank', myAccNumLabel:'Account number', myAccSave:'Save and continue', myAccEdit:'Change account' },
+      myAccBankLabel:'Bank', myAccNumLabel:'Account number', myAccSave:'Save and continue', myAccEdit:'Change account',
+      // ---- Interception / personalisation / retention ----
+      btnQuick:'⚡ Quick log', btnStreakUnit:'d', btnInsights:'📊 My pattern',
+      quickTitle:'Log what you resisted', quickDesc:'Enter the amount you just resisted and it ships straight to your goal.',
+      quickNameLabel:'What did you resist? (optional)', quickNamePlaceholder:'e.g. Late-night delivery',
+      quickSave:'Ship it to my goal', quickCancel:'Cancel', quickDefaultName:'Impulse defended',
+      quickSrcShare:'Came in from a share. Check the amount is right.',
+      quickSrcShortcut:'Came in from your home-screen shortcut.',
+      quickSrcNudge:'Came in from a reminder.',
+      nudgePersonal:(h)=>`${h} is when the urge usually hits. Tap here before you buy.`,
+      nudgeGeneric:'Wallets loosen late at night. Tap here before you buy.',
+      nudgeCta:'Log', nudgeComeback:(a)=>`Welcome back. You have held on to ${a} so far.`,
+      insightsTitle:'📊 My impulse pattern',
+      insightsEmpty:'No records yet. Resist once and your pattern starts building here.',
+      insightsTotal:'Total held', insightsCount:'Times', insightsAvg:'Average',
+      insightsByHour:'By hour', insightsByDay:'By weekday', insightsByCat:'By category', insightsBySrc:'By entry point',
+      insightsHintPersonal:(h)=>`Your urges cluster around <b>${h}</b>. Turn notifications on and we will remind you then.`,
+      insightsHintGeneric:'Once you have more than 5 records we will find your weak hours and time reminders to them.',
+      insightsClose:'Close',
+      srcManual:'In app', srcShare:'Share', srcShortcut:'Shortcut', srcNudge:'Reminder',
+      reportTitle:'Last week', reportCap:'Held last week',
+      reportUp:(p)=>`${p}% more than the week before`, reportDown:(p)=>`${p}% less than the week before`,
+      reportFlat:'About the same as last week', reportCount:'Times', reportPrev:'Prev week',
+      reportClose:'Nice', reportEmpty:'No records from last week.',
+      streakTitle:'🔥 Resistance streak', streakNow:'Current', streakBest:'Best',
+      streakFreeze:'Freeze', streakFreezeLeft:'available', streakFreezeUsed:'used',
+      streakHint:'One log a day keeps the streak alive. Miss a single day and your freeze covers it.',
+      badge7:'7 days', badge30:'30 days', badge100:'100 days', streakClose:'Close',
+      milestoneTitle:(a)=>`${a} passed!`, milestoneDesc:'This is how much you decided not to spend.', milestoneClose:'Keep going',
+      notifyLabel:'Weak-hour reminders', notifyDesc:'We ping you just before your usual urge window.',
+      notifyOn:'On', notifyOff:'Turn on', notifyBlocked:'Blocked', notifyUnsupported:'Unsupported',
+      goalSuggest:(a)=>`At your last-4-week pace that is about <b>${a}</b> in 3 months. Tap to fill` },
     ja: { brand:'Donmaggi', tabFood:'🍚 デリバリー', tabFashion:'👕 ファッション', tabBeauty:'💄 ビューティー',
       goalName:'✈️ 済州島往復航空券', sectionTitle:'🔥 衝動買いゾーン', sectionSub:'今日の危機を選んでください',
       stepPaid:'決済完了', stepPrep:'商品準備', stepShip:'配送中', stepDone:'配送完了',
@@ -483,7 +700,38 @@
       myAccDesc:'銀行アプリで下記の口座へ直接振り込んでください。\nお金は最初から最後まであなたのものです。',
       myAccCopy:'口座番号をコピー', myAccCopied:'コピーしました!', myAccDone:'振込完了しました', myAccCancel:'キャンセル',
       myAccFormDesc:'送金先となるご自身の貯蓄口座を入力してください。\n最初の一度だけで大丈夫です。',
-      myAccBankLabel:'銀行', myAccNumLabel:'口座番号', myAccSave:'保存して続ける', myAccEdit:'口座を変更' },
+      myAccBankLabel:'銀行', myAccNumLabel:'口座番号', myAccSave:'保存して続ける', myAccEdit:'口座を変更',
+      // ---- 介入ポイント / パーソナライズ / リテンション ----
+      btnQuick:'⚡ クイック記録', btnStreakUnit:'日', btnInsights:'📊 私のパターン',
+      quickTitle:'我慢した金額を記録', quickDesc:'いま我慢した金額を入れると、そのまま目標へ配送されます。',
+      quickNameLabel:'何を我慢しましたか?(任意)', quickNamePlaceholder:'例: 夜食のデリバリー',
+      quickSave:'目標へ配送する', quickCancel:'キャンセル', quickDefaultName:'衝動買い防御',
+      quickSrcShare:'共有から入りました。金額が正しいか確認してください。',
+      quickSrcShortcut:'ホーム画面のショートカットから入りました。',
+      quickSrcNudge:'通知から入りました。',
+      nudgePersonal:(h)=>`${h}はいつも衝動が来る時間帯です。買う前にここを押してみてください。`,
+      nudgeGeneric:'夜遅くは財布がゆるみます。買う前にここを押してみてください。',
+      nudgeCta:'記録', nudgeComeback:(a)=>`お久しぶりです。これまでに${a}を守りました。`,
+      insightsTitle:'📊 私の衝動パターン',
+      insightsEmpty:'まだ記録がありません。一度でも我慢すると、ここにパターンが溜まります。',
+      insightsTotal:'守った合計', insightsCount:'回数', insightsAvg:'1回平均',
+      insightsByHour:'時間帯別', insightsByDay:'曜日別', insightsByCat:'カテゴリ別', insightsBySrc:'流入経路別',
+      insightsHintPersonal:(h)=>`衝動が最も多い時間帯は<b>${h}</b>です。通知をオンにすると、その時間に合わせてお知らせします。`,
+      insightsHintGeneric:'記録が5回を超えると、弱い時間帯を見つけて通知時間を合わせます。',
+      insightsClose:'閉じる',
+      srcManual:'アプリから', srcShare:'共有', srcShortcut:'ショートカット', srcNudge:'通知',
+      reportTitle:'先週のレポート', reportCap:'先週守った金額',
+      reportUp:(p)=>`前週より${p}%多く守れました`, reportDown:(p)=>`前週より${p}%減りました`,
+      reportFlat:'前週と同じくらいです', reportCount:'回数', reportPrev:'前週',
+      reportClose:'いいね', reportEmpty:'先週の記録がありません。',
+      streakTitle:'🔥 抵抗ストリーク', streakNow:'連続記録', streakBest:'最高記録',
+      streakFreeze:'保護券', streakFreezeLeft:'残り', streakFreezeUsed:'使用済み',
+      streakHint:'1日1回の記録でストリークは続きます。1日抜けても保護券1回が代わりに守ります。',
+      badge7:'7日', badge30:'30日', badge100:'100日', streakClose:'閉じる',
+      milestoneTitle:(a)=>`${a}突破!`, milestoneDesc:'使わないと決めたお金がここまで貯まりました。', milestoneClose:'続ける',
+      notifyLabel:'弱い時間帯の通知', notifyDesc:'衝動が来る時間帯の直前にお知らせします。',
+      notifyOn:'オン', notifyOff:'オンにする', notifyBlocked:'ブロック中', notifyUnsupported:'非対応',
+      goalSuggest:(a)=>`直近4週のペースなら3か月で<b>${a}</b>ほど貯まります。タップで入力` },
     zh: { brand:'Donmaggi', tabFood:'🍚 外卖', tabFashion:'👕 时尚', tabBeauty:'💄 美妆',
       goalName:'✈️ 济州岛往返机票', sectionTitle:'🔥 冲动消费区', sectionSub:'选择今天的危机情况',
       stepPaid:'已支付', stepPrep:'备货中', stepShip:'配送中', stepDone:'已送达',
@@ -510,7 +758,38 @@
       myAccDesc:'请打开银行App,直接转账到以下账户。\n这笔钱从头到尾都是您自己的。',
       myAccCopy:'复制账号', myAccCopied:'已复制!', myAccDone:'已完成转账', myAccCancel:'取消',
       myAccFormDesc:'请输入您要转入的储蓄账户。\n只需填写一次。',
-      myAccBankLabel:'银行', myAccNumLabel:'账号', myAccSave:'保存并继续', myAccEdit:'更换账户' }
+      myAccBankLabel:'银行', myAccNumLabel:'账号', myAccSave:'保存并继续', myAccEdit:'更换账户',
+      // ---- 干预点 / 个性化 / 留存 ----
+      btnQuick:'⚡ 快速记录', btnStreakUnit:'天', btnInsights:'📊 我的模式',
+      quickTitle:'记录忍住的金额', quickDesc:'输入刚才忍住的金额,它会直接"配送"到你的目标。',
+      quickNameLabel:'忍住了什么?(选填)', quickNamePlaceholder:'例如:夜宵外卖',
+      quickSave:'配送到我的目标', quickCancel:'取消', quickDefaultName:'成功抵制冲动',
+      quickSrcShare:'从分享进入,请确认金额是否正确。',
+      quickSrcShortcut:'从主屏幕快捷方式进入。',
+      quickSrcNudge:'从通知进入。',
+      nudgePersonal:(h)=>`${h}是你平时冲动来袭的时段。下单前先点这里。`,
+      nudgeGeneric:'深夜钱包容易松动。下单前先点这里。',
+      nudgeCta:'记录', nudgeComeback:(a)=>`好久不见。你已经守住了${a}。`,
+      insightsTitle:'📊 我的冲动模式',
+      insightsEmpty:'还没有记录。只要忍住一次,这里就会开始积累模式。',
+      insightsTotal:'累计守住', insightsCount:'次数', insightsAvg:'单次平均',
+      insightsByHour:'按时段', insightsByDay:'按星期', insightsByCat:'按类别', insightsBySrc:'按入口',
+      insightsHintPersonal:(h)=>`冲动最常出现在<b>${h}</b>。开启通知后会在那个时间提醒你。`,
+      insightsHintGeneric:'记录超过5次后,会找出你的薄弱时段并据此安排提醒。',
+      insightsClose:'关闭',
+      srcManual:'应用内', srcShare:'分享', srcShortcut:'快捷方式', srcNudge:'通知',
+      reportTitle:'上周报告', reportCap:'上周守住的钱',
+      reportUp:(p)=>`比前一周多守住${p}%`, reportDown:(p)=>`比前一周少了${p}%`,
+      reportFlat:'与前一周相近', reportCount:'次数', reportPrev:'前一周',
+      reportClose:'很好', reportEmpty:'上周没有记录。',
+      streakTitle:'🔥 抵抗连胜', streakNow:'当前连续', streakBest:'最佳记录',
+      streakFreeze:'保护券', streakFreezeLeft:'可用', streakFreezeUsed:'已使用',
+      streakHint:'每天记录一次即可延续连胜。漏掉一天时,一次保护券会替你顶上。',
+      badge7:'7天', badge30:'30天', badge100:'100天', streakClose:'关闭',
+      milestoneTitle:(a)=>`突破${a}!`, milestoneDesc:'你决定不花的钱已经攒到这里了。', milestoneClose:'继续',
+      notifyLabel:'薄弱时段提醒', notifyDesc:'在冲动来袭的时段之前提醒你。',
+      notifyOn:'已开启', notifyOff:'开启', notifyBlocked:'已屏蔽', notifyUnsupported:'不支持',
+      goalSuggest:(a)=>`按最近4周的节奏,3个月约能攒<b>${a}</b>。点击填入` }
   };
 
   const FALLBACK_CATS = {
@@ -687,6 +966,7 @@
     document.getElementById('newGoalName').placeholder = T[currentLang].goalNamePlaceholder;
     document.getElementById('newGoalAmount').placeholder = T[currentLang].goalAmountPlaceholder;
     renderEmojiGrid();
+    renderGoalSuggest();
     openOverlay('ovNewGoal');
   }
 
@@ -776,6 +1056,16 @@
     document.getElementById('myAccEditBtn').textContent = t.myAccEdit;
     document.getElementById('myAccBankInput').placeholder = t.settingsBankPlaceholder;
     document.getElementById('myAccNumInput').placeholder = t.settingsAccountPlaceholder;
+    // ---- 고도화 기능 문구 ----
+    document.getElementById('quickTitleText').textContent = t.quickTitle;
+    document.getElementById('quickDescText').textContent = t.quickDesc;
+    document.getElementById('quickNameLabelText').textContent = t.quickNameLabel;
+    document.getElementById('quickSaveBtn').textContent = t.quickSave;
+    document.getElementById('quickCancelBtn').textContent = t.quickCancel;
+    document.getElementById('quickUnitText').textContent = t.currency.trim();
+    renderToolRow();
+    renderNudge();
+    renderNotifyBtn();
   }
 
   function setLanguage(lang) {
@@ -906,6 +1196,7 @@
     document.getElementById('catalogUrlInput').value = CATALOG_URL;
     const at = localStorage.getItem('donmaggi_catalog_at');
     document.getElementById('catalogStatus').textContent = at ? '마지막 갱신 ' + new Date(at).toLocaleString('ko-KR') : '아직 갱신 안 됨';
+    renderNotifyBtn();
     openOverlay('ovSettings');
   }
 
@@ -978,10 +1269,19 @@
     const g = activeGoal();
     g.saved = Math.min(g.target, g.saved + current.price);
     saveState();
+    // 모든 지표의 원천: 금액·시각·카테고리·유입 경로를 남깁니다.
+    logEvent({
+      amount: current.price,
+      goalId: g.id,
+      name: current.name,
+      category: current.category || activeTab,
+      source: entrySource
+    });
     document.getElementById('rcName').textContent = current.name;
     document.getElementById('rcPrice').textContent = priceLabel(current.price);
-    document.getElementById('rcStatLabel').textContent = current.statLabel;
-    document.getElementById('rcStat').textContent = current.statValue;
+    document.getElementById('rcStatLabel').textContent = current.statLabel || '';
+    document.getElementById('rcStat').textContent = current.statValue || '';
+    document.getElementById('rcStatLabel').parentElement.style.display = current.statLabel ? 'flex' : 'none';
     const pct = Math.round((current.price / g.target) * 1000) / 10;
     document.getElementById('rcGoalPct').textContent = '+' + pct + '%';
     document.getElementById('ovReceipt').classList.add('open');
@@ -991,11 +1291,443 @@
     document.getElementById('ovReceipt').classList.remove('open');
     renderGoalChips();
     renderGoal();
+    renderToolRow();
+    renderNudge();
+    entrySource = 'manual';
+    checkMilestone();
+  }
+
+  // ==================================================================
+  //  고도화 모듈 — 이벤트 로그 · 개입 지점 · 개인화 · 리텐션
+  // ==================================================================
+
+  const EV_KEY = 'donmaggi_events';
+  const MS_DAY = 86400000;
+  const LOCALES = { ko:'ko-KR', en:'en-US', ja:'ja-JP', zh:'zh-CN' };
+  const QUICK_PRESETS = [5000, 10000, 20000, 30000, 50000];
+  const MILESTONES = [100000, 300000, 500000, 1000000, 3000000, 5000000, 10000000];
+
+  let entrySource = 'manual';   // manual | share | shortcut | nudge
+  let events = loadEvents();
+  let nudgeTimer = null;
+  let suggestedGoalAmount = 0;
+
+  // ---------- 이벤트 로그 (모든 지표의 전제) ----------
+  function loadEvents() {
+    try {
+      const raw = localStorage.getItem(EV_KEY);
+      const parsed = raw ? JSON.parse(raw) : null;
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) { return []; }
+  }
+  function saveEvents() {
+    try { localStorage.setItem(EV_KEY, JSON.stringify(events.slice(-500))); } catch (e) {}
+  }
+  function logEvent(data) {
+    events.push(Object.assign({ id: 'e' + Date.now(), ts: Date.now() }, data));
+    saveEvents();
+  }
+
+  // ---------- 날짜 도우미 ----------
+  function startOfDay(ts) { const d = new Date(ts); d.setHours(0,0,0,0); return d.getTime(); }
+  function dayKey(ts) { const d = new Date(ts); return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate(); }
+  function weekStart(ts) {                       // 월요일 기준 주 시작
+    const d = startOfDay(ts);
+    const dow = (new Date(d).getDay() + 6) % 7;  // 월=0
+    return d - dow * MS_DAY;
+  }
+  function sumAmount(list) { return list.reduce((a, e) => a + (e.amount || 0), 0); }
+  function eventsBetween(from, to) { return events.filter(e => e.ts >= from && e.ts < to); }
+  function totalSavedAll() { return sumAmount(events); }
+
+  // ---------- 개인화: 취약 시간대 ----------
+  function vulnerableHours() {
+    if (events.length < 5) return { hours: [21, 22, 23], personalised: false };
+    const byHour = new Array(24).fill(0);
+    events.forEach(e => byHour[new Date(e.ts).getHours()]++);
+    const ranked = byHour.map((c, h) => ({ c, h }))
+      .filter(x => x.c > 0)
+      .sort((a, b) => b.c - a.c)
+      .slice(0, 2)
+      .map(x => x.h);
+    return { hours: ranked, personalised: true };
+  }
+  function hourRangeLabel(hours) {
+    return hours.slice().sort((a, b) => a - b).map(h => String(h).padStart(2, '0') + ':00').join(', ');
+  }
+
+  // ---------- 리텐션: 스트릭 ----------
+  function activeDays() {
+    return Array.from(new Set(events.map(e => startOfDay(e.ts)))).sort((a, b) => b - a);
+  }
+  function bestStreak(days) {
+    if (!days.length) return 0;
+    const asc = days.slice().sort((a, b) => a - b);
+    let best = 1, run = 1;
+    for (let i = 1; i < asc.length; i++) {
+      run = (asc[i] - asc[i-1]) === MS_DAY ? run + 1 : 1;
+      if (run > best) best = run;
+    }
+    return best;
+  }
+  function computeStreak() {
+    const days = activeDays();
+    if (!days.length) return { current: 0, best: 0, freezeUsed: false };
+    const today = startOfDay(Date.now());
+    // 오늘 아직 기록 전이어도 어제까지 이어졌으면 스트릭은 살아 있습니다.
+    if (days[0] !== today && days[0] !== today - MS_DAY) {
+      return { current: 0, best: bestStreak(days), freezeUsed: false };
+    }
+    let cursor = days[0], current = 1, freezeUsed = false;
+    for (let i = 1; i < days.length; i++) {
+      const gap = (cursor - days[i]) / MS_DAY;
+      if (gap === 1) { current++; cursor = days[i]; }
+      else if (gap === 2 && !freezeUsed) { current++; freezeUsed = true; cursor = days[i]; }  // 보호권 1회
+      else break;
+    }
+    return { current, best: Math.max(current, bestStreak(days)), freezeUsed };
+  }
+
+  // ---------- 리텐션: 마일스톤 ----------
+  function hitMilestones() {
+    try { return JSON.parse(localStorage.getItem('donmaggi_milestones') || '[]'); } catch (e) { return []; }
+  }
+  function checkMilestone() {
+    const total = totalSavedAll();
+    const hit = hitMilestones();
+    const fresh = MILESTONES.filter(m => total >= m && hit.indexOf(m) === -1);
+    if (!fresh.length) return;
+    try { localStorage.setItem('donmaggi_milestones', JSON.stringify(hit.concat(fresh))); } catch (e) {}
+    showMilestone(fresh[fresh.length - 1]);
+  }
+  function showMilestone(amount) {
+    const t = T[currentLang];
+    document.getElementById('milestoneTitleText').textContent = t.milestoneTitle(priceLabel(amount));
+    document.getElementById('milestoneDescText').textContent = t.milestoneDesc;
+    document.getElementById('milestoneCloseBtn').textContent = t.milestoneClose;
+    openOverlay('ovMilestone');
+  }
+
+  // ---------- 개입 지점 1: 빠른 기록 ----------
+  function openQuickLog(amount, name) {
+    const t = T[currentLang];
+    document.getElementById('quickAmount').value = amount ? String(amount) : '';
+    document.getElementById('quickName').value = name || '';
+    document.getElementById('quickName').placeholder = t.quickNamePlaceholder;
+    document.getElementById('quickUnitText').textContent = t.currency.trim();
+    document.getElementById('quickChips').innerHTML =
+      QUICK_PRESETS.map(v => `<button class="amt-chip" onclick="bumpQuick(${v})">+${fmt(v)}</button>`).join('');
+    const note = { share: t.quickSrcShare, shortcut: t.quickSrcShortcut, nudge: t.quickSrcNudge }[entrySource] || '';
+    document.getElementById('quickSrcNote').textContent = note;
+    openOverlay('ovQuick');
+    if (!amount) setTimeout(() => document.getElementById('quickAmount').focus(), 350);
+  }
+  function bumpQuick(v) {
+    const el = document.getElementById('quickAmount');
+    el.value = String((parseInt(el.value, 10) || 0) + v);
+  }
+  function closeQuickLog() { closeOverlay('ovQuick'); entrySource = 'manual'; }
+  function saveQuickLog() {
+    const amt = parseInt(document.getElementById('quickAmount').value, 10);
+    if (!amt || amt <= 0) { document.getElementById('quickAmount').focus(); return; }
+    const name = document.getElementById('quickName').value.trim() || T[currentLang].quickDefaultName;
+    current = { name, price: amt, emoji: '⚡', statLabel: '', statValue: '', category: 'quick' };
+    closeOverlay('ovQuick');
+    showReceipt();
+  }
+
+  // ---------- 개입 지점 2: 공유시트 / 바로가기 유입 ----------
+  function parseSharedAmount(text) {
+    if (!text) return 0;
+    const flat = String(text).replace(/\s+/g, '');
+    // 통화 표기가 붙은 금액을 최우선으로 봅니다.
+    const marked = flat.match(/(?:₩|krw)?(\d{1,3}(?:,\d{3})+|\d{3,9})(?:원|₩|krw|won|엔|元)/i);
+    if (marked) {
+      const n = parseInt(marked[1].replace(/,/g, ''), 10);
+      if (n >= 100) return n;
+    }
+    const candidates = (flat.match(/\d{1,3}(?:,\d{3})+|\d{3,9}/g) || [])
+      .map(s => parseInt(s.replace(/,/g, ''), 10))
+      .filter(n => n >= 1000 && n <= 10000000);
+    return candidates.length ? Math.max.apply(null, candidates) : 0;
+  }
+  function handleEntryParams() {
+    let p;
+    try { p = new URLSearchParams(location.search); } catch (e) { return; }
+    const shared = [p.get('title'), p.get('text'), p.get('url')].filter(Boolean).join(' ');
+    const quick = p.get('quick');
+    const insights = p.get('insights');
+    if (!shared && !quick && !insights) return;
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    if (shared) {
+      entrySource = 'share';
+      openQuickLog(parseSharedAmount(shared), (p.get('title') || '').trim().slice(0, 30));
+    } else if (quick) {
+      entrySource = 'shortcut';
+      openQuickLog();
+    } else {
+      openInsights();
+    }
+  }
+
+  // ---------- 개입 지점 3: 넛지 배너 ----------
+  function nudgeDismissedToday() { return localStorage.getItem('donmaggi_nudge_at') === dayKey(Date.now()); }
+  function dismissNudge() {
+    try { localStorage.setItem('donmaggi_nudge_at', dayKey(Date.now())); } catch (e) {}
+    document.getElementById('nudgeBar').classList.remove('show');
+  }
+  function renderNudge() {
+    const t = T[currentLang];
+    const bar = document.getElementById('nudgeBar');
+    bar.classList.remove('show');
+    if (nudgeDismissedToday()) return;
+
+    // 배열 순서에 의존하지 않도록 최신 시각을 직접 구합니다.
+    const last = events.reduce((mx, e) => (e.ts > mx ? e.ts : mx), 0);
+    if (last && (Date.now() - last) > 7 * MS_DAY) {          // 7일 이상 미접속 → 재소환
+      document.getElementById('nudgeEmoji').textContent = '👋';
+      document.getElementById('nudgeText').textContent = t.nudgeComeback(priceLabel(totalSavedAll()));
+      document.getElementById('nudgeCta').textContent = t.nudgeCta;
+      bar.classList.add('show');
+      return;
+    }
+    const v = vulnerableHours();
+    const h = new Date().getHours();
+    if (v.hours.indexOf(h) !== -1) {                          // 취약 시간대
+      document.getElementById('nudgeEmoji').textContent = '🌙';
+      document.getElementById('nudgeText').textContent =
+        v.personalised ? t.nudgePersonal(hourRangeLabel([h])) : t.nudgeGeneric;
+      document.getElementById('nudgeCta').textContent = t.nudgeCta;
+      bar.classList.add('show');
+    }
+  }
+  function nudgeAction() { entrySource = 'nudge'; dismissNudge(); openQuickLog(); }
+
+  // ---------- 알림 ----------
+  // PWA 한계: 푸시 서버 없이는 앱이 살아 있는 동안에만 예약이 유효합니다.
+  function notifySupported() { return typeof Notification !== 'undefined'; }
+  function notifyEnabled() {
+    return notifySupported() && localStorage.getItem('donmaggi_notify') === '1' && Notification.permission === 'granted';
+  }
+  function renderNotifyBtn() {
+    const t = T[currentLang], btn = document.getElementById('notifyBtn');
+    if (!btn) return;
+    document.getElementById('notifyLabelText').textContent = t.notifyLabel;
+    document.getElementById('notifyDescText').textContent = t.notifyDesc;
+    if (!notifySupported()) { btn.textContent = t.notifyUnsupported; btn.classList.remove('on'); return; }
+    if (Notification.permission === 'denied') { btn.textContent = t.notifyBlocked; btn.classList.remove('on'); return; }
+    const on = notifyEnabled();
+    btn.textContent = on ? t.notifyOn : t.notifyOff;
+    btn.classList.toggle('on', on);
+  }
+  function toggleNotify() {
+    if (!notifySupported()) return;
+    if (notifyEnabled()) {
+      try { localStorage.setItem('donmaggi_notify', '0'); } catch (e) {}
+      if (nudgeTimer) clearTimeout(nudgeTimer);
+      renderNotifyBtn();
+      return;
+    }
+    const done = (perm) => {
+      if (perm === 'granted') {
+        try { localStorage.setItem('donmaggi_notify', '1'); } catch (e) {}
+        scheduleNudgeNotification();
+      }
+      renderNotifyBtn();
+    };
+    if (Notification.permission === 'default') {
+      const r = Notification.requestPermission(done);
+      if (r && typeof r.then === 'function') r.then(done).catch(() => {});
+    } else { done(Notification.permission); }
+  }
+  function scheduleNudgeNotification() {
+    if (nudgeTimer) clearTimeout(nudgeTimer);
+    if (!notifyEnabled()) return;
+    const now = Date.now();
+    let soonest = Infinity;
+    vulnerableHours().hours.forEach(h => {
+      const target = new Date(); target.setHours(h, 0, 0, 0);
+      let diff = target.getTime() - now;
+      if (diff < 60000) diff += MS_DAY;
+      if (diff < soonest) soonest = diff;
+    });
+    if (!isFinite(soonest)) return;
+    nudgeTimer = setTimeout(() => {
+      try {
+        const t = T[currentLang];
+        new Notification(t.brand, { body: t.nudgeGeneric, icon: 'icons/icon-192.png', tag: 'donmaggi-nudge' });
+      } catch (e) {}
+      scheduleNudgeNotification();
+    }, Math.min(soonest, 2147483000));
+  }
+
+  // ---------- 개인화: 패턴 대시보드 ----------
+  function barRows(pairs, max) {
+    return pairs.map(p => {
+      const w = max ? Math.round((p.v / max) * 100) : 0;
+      return `<div class="bar-row">
+        <div class="bar-label">${p.k}</div>
+        <div class="bar-track"><div class="bar-fill ${p.v ? '' : 'dim'}" style="width:${w}%"></div></div>
+        <div class="bar-val">${p.v || ''}</div>
+      </div>`;
+    }).join('');
+  }
+  function openInsights() {
+    const t = T[currentLang];
+    document.getElementById('insightsTitleText').textContent = t.insightsTitle;
+    document.getElementById('insightsCloseBtn').textContent = t.insightsClose;
+    const body = document.getElementById('insightsBody');
+
+    if (!events.length) {
+      body.innerHTML = `<div class="empty-note">${t.insightsEmpty}</div>`;
+      openOverlay('ovInsights');
+      return;
+    }
+
+    const total = totalSavedAll(), count = events.length, avg = Math.round(total / count);
+    const unit = t.currency.trim();
+
+    const buckets = new Array(6).fill(0);
+    events.forEach(e => buckets[Math.floor(new Date(e.ts).getHours() / 4)]++);
+    const bucketPairs = buckets.map((v, i) => ({
+      k: String(i * 4).padStart(2, '0') + '–' + String(i * 4 + 4).padStart(2, '0'), v
+    }));
+
+    const dow = new Array(7).fill(0);
+    events.forEach(e => dow[(new Date(e.ts).getDay() + 6) % 7]++);
+    const fmtDay = new Intl.DateTimeFormat(LOCALES[currentLang] || 'en-US', { weekday: 'short' });
+    const dowPairs = dow.map((v, i) => ({ k: fmtDay.format(new Date(2024, 0, 1 + i)), v }));  // 2024-01-01 = 월
+
+    const catMap = { food: t.tabFood, fashion: t.tabFashion, beauty: t.tabBeauty, quick: t.btnQuick };
+    const catCount = {};
+    events.forEach(e => { const k = e.category || 'quick'; catCount[k] = (catCount[k] || 0) + 1; });
+    const catPairs = Object.keys(catCount).map(k => ({ k: (catMap[k] || k).replace(/^\S+\s/, ''), v: catCount[k] }));
+
+    const srcMap = { manual: t.srcManual, share: t.srcShare, shortcut: t.srcShortcut, nudge: t.srcNudge };
+    const srcCount = {};
+    events.forEach(e => { const k = e.source || 'manual'; srcCount[k] = (srcCount[k] || 0) + 1; });
+    const srcPairs = Object.keys(srcCount).map(k => ({ k: srcMap[k] || k, v: srcCount[k] }));
+
+    const v = vulnerableHours();
+    const hint = v.personalised ? t.insightsHintPersonal(hourRangeLabel(v.hours)) : t.insightsHintGeneric;
+    const maxOf = arr => Math.max.apply(null, arr.concat([0]));
+
+    body.innerHTML = `
+      <div class="stat-grid">
+        <div class="stat-box"><div class="s-val">${fmt(total)}</div><div class="s-key">${t.insightsTotal} (${unit})</div></div>
+        <div class="stat-box"><div class="s-val">${count}</div><div class="s-key">${t.insightsCount}</div></div>
+        <div class="stat-box"><div class="s-val">${fmt(avg)}</div><div class="s-key">${t.insightsAvg} (${unit})</div></div>
+      </div>
+      <div class="hint-box">${hint}</div>
+      <div class="chart"><p class="chart-title">${t.insightsByHour}</p>${barRows(bucketPairs, maxOf(buckets))}</div>
+      <div class="chart"><p class="chart-title">${t.insightsByDay}</p>${barRows(dowPairs, maxOf(dow))}</div>
+      <div class="chart"><p class="chart-title">${t.insightsByCat}</p>${barRows(catPairs, maxOf(catPairs.map(x => x.v)))}</div>
+      <div class="chart"><p class="chart-title">${t.insightsBySrc}</p>${barRows(srcPairs, maxOf(srcPairs.map(x => x.v)))}</div>`;
+    openOverlay('ovInsights');
+  }
+
+  // ---------- 개인화: 목표 금액 추천 ----------
+  function suggestGoalAmount() {
+    const recent = events.filter(e => e.ts >= Date.now() - 28 * MS_DAY);
+    if (recent.length < 3) return 0;
+    const perWeek = sumAmount(recent) / 4;
+    const projected = Math.round(perWeek * 13 / 10000) * 10000;   // 3개월(13주), 만 단위 반올림
+    return projected >= 10000 ? projected : 0;
+  }
+  function renderGoalSuggest() {
+    const box = document.getElementById('goalSuggestBox');
+    suggestedGoalAmount = suggestGoalAmount();
+    if (!suggestedGoalAmount) { box.style.display = 'none'; return; }
+    box.innerHTML = T[currentLang].goalSuggest(priceLabel(suggestedGoalAmount));
+    box.style.display = 'block';
+  }
+  function applyGoalSuggest() {
+    if (!suggestedGoalAmount) return;
+    document.getElementById('newGoalAmount').value = String(suggestedGoalAmount);
+  }
+
+  // ---------- 리텐션: 주간 리포트 ----------
+  function openReport(auto) {
+    const t = T[currentLang];
+    const thisWeek = weekStart(Date.now());
+    const lastWeek = thisWeek - 7 * MS_DAY;
+    const lastList = eventsBetween(lastWeek, thisWeek);
+    const prevList = eventsBetween(lastWeek - 7 * MS_DAY, lastWeek);
+    if (auto && !lastList.length) return false;
+
+    document.getElementById('reportTitleText').textContent = t.reportTitle;
+    document.getElementById('reportCloseBtn').textContent = t.reportClose;
+
+    const lastSum = sumAmount(lastList), prevSum = sumAmount(prevList);
+    let delta = '';
+    if (prevSum > 0) {
+      const pct = Math.round(Math.abs(lastSum - prevSum) / prevSum * 100);
+      if (pct < 5) delta = `<div class="report-delta down">${t.reportFlat}</div>`;
+      else delta = lastSum > prevSum
+        ? `<div class="report-delta up">${t.reportUp(pct)}</div>`
+        : `<div class="report-delta down">${t.reportDown(pct)}</div>`;
+    }
+    document.getElementById('reportBody').innerHTML = lastList.length ? `
+      <div class="report-hero">
+        <div class="r-amt">${priceLabel(lastSum)}</div>
+        <div class="r-cap">${t.reportCap}</div>
+        ${delta}
+      </div>
+      <div class="report-rows">
+        <div class="r-row"><span class="k">${t.reportCount}</span><span class="v">${lastList.length}</span></div>
+        <div class="r-row"><span class="k">${t.reportPrev}</span><span class="v">${priceLabel(prevSum)}</span></div>
+      </div>` : `<div class="empty-note">${t.reportEmpty}</div>`;
+    openOverlay('ovReport');
+    return true;
+  }
+  function maybeShowWeeklyReport() {
+    const wk = String(weekStart(Date.now()));
+    if (localStorage.getItem('donmaggi_report_week') === wk) return;
+    if (openReport(true)) {
+      try { localStorage.setItem('donmaggi_report_week', wk); } catch (e) {}
+    }
+  }
+
+  // ---------- 리텐션: 스트릭 패널 ----------
+  function openStreak() {
+    const t = T[currentLang];
+    const s = computeStreak();
+    document.getElementById('streakTitleText').textContent = t.streakTitle;
+    document.getElementById('streakCloseBtn').textContent = t.streakClose;
+    const badges = [
+      { n: 7,   label: t.badge7,   emoji: '🔥' },
+      { n: 30,  label: t.badge30,  emoji: '🏅' },
+      { n: 100, label: t.badge100, emoji: '👑' }
+    ].map(b => `<div class="badge ${s.best >= b.n ? 'earned' : ''}">
+        <div class="b-emoji">${b.emoji}</div><div class="b-label">${b.label}</div></div>`).join('');
+    document.getElementById('streakBody').innerHTML = `
+      <div class="stat-grid">
+        <div class="stat-box"><div class="s-val">${s.current}</div><div class="s-key">${t.streakNow} (${t.btnStreakUnit})</div></div>
+        <div class="stat-box"><div class="s-val">${s.best}</div><div class="s-key">${t.streakBest} (${t.btnStreakUnit})</div></div>
+        <div class="stat-box"><div class="s-val">${s.freezeUsed ? t.streakFreezeUsed : t.streakFreezeLeft}</div><div class="s-key">${t.streakFreeze}</div></div>
+      </div>
+      <div class="badge-row">${badges}</div>
+      <div class="hint-box" style="margin-top:16px">${t.streakHint}</div>`;
+    openOverlay('ovStreak');
+  }
+
+  // ---------- 상단 도구 줄 ----------
+  function renderToolRow() {
+    const t = T[currentLang];
+    const s = computeStreak();
+    document.getElementById('btnQuickLog').textContent = t.btnQuick;
+    const sb = document.getElementById('btnStreak');
+    sb.innerHTML = `<span>🔥 <span class="t-num">${s.current}</span>${t.btnStreakUnit}</span>`;
+    sb.classList.toggle('hot', s.current > 0);
+    document.getElementById('btnInsights').textContent = t.btnInsights;
   }
 
   setLanguage(currentLang);
   switchTab('food');
   refreshCatalog();
+  handleEntryParams();
+  maybeShowWeeklyReport();
+  scheduleNudgeNotification();
   // 앱을 다시 열 때마다 최신 목록 확인
   document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshCatalog(); });
 
